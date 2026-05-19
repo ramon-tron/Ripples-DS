@@ -1,0 +1,285 @@
+/* ─── Base ─── */
+/* All stateful color properties route through local custom props so
+   hover/active/disabled only need to override the relevant variable. */
+.button {
+  background-color: var(--_bg, transparent);
+  color: var(--_color, inherit);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ds-spacing-xs);
+  border-radius: var(--_radius, var(--ds-border-radius-s));
+  border: none;
+
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline-offset: 2px;
+  position: relative;
+
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+}
+
+.button:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Sizes ─── */
+/* Typography, height, padding, and radius all driven by semantic button tokens. */
+.button[data-size='sm'] {
+  height: 24px;
+  padding: 0 var(--ds-spacing-xs);
+  --_radius: var(--ds-border-radius-xs);
+  font-family: var(--ds-button-sm-font-family);
+  font-size: var(--ds-button-sm-font-size);
+  font-weight: var(--ds-button-sm-font-weight);
+  line-height: var(--ds-button-sm-line-height);
+  letter-spacing: var(--ds-button-sm-letter-spacing);
+}
+.button[data-size='md'] {
+  height: 32px;
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  --_radius: var(--ds-border-radius-s);
+  font-family: var(--ds-button-md-font-family);
+  font-size: var(--ds-button-md-font-size);
+  font-weight: var(--ds-button-md-font-weight);
+  line-height: var(--ds-button-md-line-height);
+  letter-spacing: var(--ds-button-md-letter-spacing);
+}
+.button[data-size='lg'] {
+  height: 40px;
+  padding: var(--ds-spacing-s) var(--ds-spacing-m);
+  --_radius: var(--ds-border-radius-s);
+  font-family: var(--ds-button-lg-font-family);
+  font-size: var(--ds-button-lg-font-size);
+  font-weight: var(--ds-button-lg-font-weight);
+  line-height: var(--ds-button-lg-line-height);
+  letter-spacing: var(--ds-button-lg-letter-spacing);
+}
+.button[data-size='xl'] {
+  height: 48px;
+  padding: var(--ds-spacing-m) var(--ds-spacing-l);
+  --_radius: var(--ds-border-radius-s);
+  font-family: var(--ds-button-xl-font-family);
+  font-size: var(--ds-button-xl-font-size);
+  font-weight: var(--ds-button-xl-font-weight);
+  line-height: var(--ds-button-xl-line-height);
+  letter-spacing: var(--ds-button-xl-letter-spacing);
+}
+
+/* Text variants: no padding, natural inline height */
+.button[data-variant='text'],
+.button[data-variant='text-mono'],
+.button[data-variant='text-destructive'] {
+  padding: 0;
+  height: auto;
+}
+
+/* ─── Icon slots ─── */
+.iconSlot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+.button[data-size='sm'] .iconSlot { width: 12px; height: 12px; }
+.button[data-size='md'] .iconSlot { width: 14px; height: 14px; }
+.button[data-size='lg'] .iconSlot { width: 16px; height: 16px; }
+.button[data-size='xl'] .iconSlot { width: 16px; height: 16px; }
+
+/* ─── Primary ─── */
+.button[data-variant='primary'] {
+  --_bg:    var(--ds-color-fill-brand);
+  --_color: var(--ds-color-text-primary-inverse);
+}
+.button[data-variant='primary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-brand-hover); }
+.button[data-variant='primary']:active:not(:disabled) { --_bg: var(--ds-color-fill-brand-pressed); }
+.button[data-variant='primary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Secondary ─── */
+.button[data-variant='secondary'] {
+  --_bg:    var(--ds-color-fill-brand-subtle);
+  --_color: var(--ds-color-text-brand);
+}
+.button[data-variant='secondary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle-hover);
+  --_color: var(--ds-color-text-link-hover);
+}
+.button[data-variant='secondary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle-pressed);
+  --_color: var(--ds-color-text-link-pressed);
+}
+.button[data-variant='secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Tertiary ─── */
+.button[data-variant='tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-brand);
+}
+.button[data-variant='tertiary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-brand-subtle); }
+.button[data-variant='tertiary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle);
+  --_color: var(--ds-color-text-link-pressed);
+}
+.button[data-variant='tertiary']:disabled { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Mono Primary ─── */
+.button[data-variant='mono-primary'] {
+  --_bg:    var(--ds-color-fill-mono);
+  --_color: var(--ds-color-text-primary-inverse);
+}
+.button[data-variant='mono-primary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-mono-hover); }
+.button[data-variant='mono-primary']:active:not(:disabled) { --_bg: var(--ds-color-fill-mono-pressed); }
+.button[data-variant='mono-primary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Mono Secondary ─── */
+.button[data-variant='mono-secondary'] {
+  --_bg:    var(--ds-color-fill-neutral);
+  --_color: var(--ds-color-text-primary);
+}
+.button[data-variant='mono-secondary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-neutral-hover); }
+.button[data-variant='mono-secondary']:active:not(:disabled) { --_bg: var(--ds-color-fill-neutral-pressed); }
+.button[data-variant='mono-secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Mono Tertiary ─── */
+.button[data-variant='mono-tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-primary);
+}
+.button[data-variant='mono-tertiary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-neutral);
+  --_color: var(--ds-color-text-link-mono-hover);
+}
+.button[data-variant='mono-tertiary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-neutral);
+  --_color: var(--ds-color-text-link-mono-pressed);
+}
+.button[data-variant='mono-tertiary']:disabled { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Destructive ─── */
+.button[data-variant='destructive'] {
+  --_bg:    var(--ds-color-fill-error);
+  --_color: var(--ds-color-text-primary-inverse);
+}
+.button[data-variant='destructive']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-error-hover); }
+.button[data-variant='destructive']:active:not(:disabled) { --_bg: var(--ds-color-fill-error-pressed); }
+.button[data-variant='destructive']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Destructive Secondary ─── */
+.button[data-variant='destructive-secondary'] {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-text-error);
+}
+.button[data-variant='destructive-secondary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle-hover);
+  --_color: var(--ds-color-text-error-hover);
+}
+.button[data-variant='destructive-secondary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle-pressed);
+  --_color: var(--ds-color-text-error-pressed);
+}
+.button[data-variant='destructive-secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-text-disabled);
+}
+
+/* ─── Destructive Tertiary ─── */
+.button[data-variant='destructive-tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-error);
+}
+.button[data-variant='destructive-tertiary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-text-error-hover);
+}
+.button[data-variant='destructive-tertiary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-text-error-pressed);
+}
+.button[data-variant='destructive-tertiary']:disabled { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Text ─── */
+.button[data-variant='text'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-brand);
+}
+.button[data-variant='text']:hover:not(:disabled)  { --_color: var(--ds-color-text-link-hover); }
+.button[data-variant='text']:active:not(:disabled) { --_color: var(--ds-color-text-link-pressed); }
+.button[data-variant='text']:disabled              { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Text Mono ─── */
+.button[data-variant='text-mono'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-link-mono);
+}
+.button[data-variant='text-mono']:hover:not(:disabled)  { --_color: var(--ds-color-text-link-mono-hover); }
+.button[data-variant='text-mono']:active:not(:disabled) { --_color: var(--ds-color-text-link-mono-pressed); }
+.button[data-variant='text-mono']:disabled              { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Text Destructive ─── */
+.button[data-variant='text-destructive'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-text-error);
+}
+.button[data-variant='text-destructive']:hover:not(:disabled)  { --_color: var(--ds-color-text-error-hover); }
+.button[data-variant='text-destructive']:active:not(:disabled) { --_color: var(--ds-color-text-error-pressed); }
+.button[data-variant='text-destructive']:disabled              { --_color: var(--ds-color-text-disabled); }
+
+/* ─── Loading: collapse to a square ─── */
+.button[aria-busy='true'] {
+  padding-inline: 0;
+  aspect-ratio: 1;
+}
+
+/* ─── Loading spinner ─── */
+.spinner {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

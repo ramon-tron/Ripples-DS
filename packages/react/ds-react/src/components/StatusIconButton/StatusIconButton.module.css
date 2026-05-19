@@ -1,0 +1,131 @@
+/* ─── Base ─── */
+.statusIconButton {
+  background-color: var(--_bg, var(--ds-color-fill-primary));
+  color: var(--_color, inherit);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: var(--ds-border-radius-pill);
+  padding: var(--_padding);
+
+  cursor: pointer;
+  user-select: none;
+  outline-offset: 2px;
+  position: relative;
+
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.statusIconButton:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+}
+
+/* ─── Sizes ─── */
+.statusIconButton[data-size='s']  { --_padding: 4px; width: 24px; height: 24px; }
+.statusIconButton[data-size='m']  { --_padding: 6px; width: 32px; height: 32px; }
+.statusIconButton[data-size='l']  { --_padding: 8px; width: 40px; height: 40px; }
+.statusIconButton[data-size='xl'] { --_padding: 8px; width: 48px; height: 48px; }
+
+/* ─── Disabled (all statuses) ─── */
+.statusIconButton:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+  cursor: not-allowed;
+}
+
+/* ─── Pending ─── */
+.statusIconButton[data-status='pending'] {
+  --_color: var(--ds-color-icon-primary);
+}
+.statusIconButton[data-status='pending']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-hover);
+  --_color: var(--ds-color-icon-mono-hover);
+}
+.statusIconButton[data-status='pending']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-pressed);
+  --_color: var(--ds-color-icon-mono-pressed);
+}
+
+/* ─── In Progress ─── */
+.statusIconButton[data-status='in-progress'] {
+  --_color: var(--ds-color-icon-info);
+}
+.statusIconButton[data-status='in-progress']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-info-subtle);
+  --_color: var(--ds-color-icon-info-hover);
+}
+.statusIconButton[data-status='in-progress']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-info-subtle);
+  --_color: var(--ds-color-icon-info-pressed);
+}
+
+/* ─── Completed ─── */
+.statusIconButton[data-status='completed'] {
+  --_color: var(--ds-color-icon-completed);
+}
+.statusIconButton[data-status='completed']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-completed-subtle);
+  --_color: var(--ds-color-icon-completed-hover);
+}
+.statusIconButton[data-status='completed']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-completed-subtle);
+  --_color: var(--ds-color-icon-completed-pressed);
+}
+
+/* ─── Approved ─── */
+.statusIconButton[data-status='approved'] {
+  --_color: var(--ds-color-icon-success);
+}
+.statusIconButton[data-status='approved']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-success-subtle);
+  --_color: var(--ds-color-icon-success-hover);
+}
+.statusIconButton[data-status='approved']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-success-subtle);
+  --_color: var(--ds-color-icon-success-pressed);
+}
+
+/* ─── Excluded ─── */
+.statusIconButton[data-status='excluded'] {
+  --_color: var(--ds-color-icon-error);
+}
+.statusIconButton[data-status='excluded']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-icon-error-hover);
+}
+.statusIconButton[data-status='excluded']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-icon-error-pressed);
+}
+
+/* ─── Review ─── */
+.statusIconButton[data-status='review'] {
+  --_color: var(--ds-color-icon-review);
+}
+.statusIconButton[data-status='review']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-review-subtle);
+  --_color: var(--ds-color-icon-review-hover);
+}
+.statusIconButton[data-status='review']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-review-subtle);
+  --_color: var(--ds-color-icon-review-pressed);
+}
+
+/* ─── Revision ─── */
+.statusIconButton[data-status='revision'] {
+  --_color: var(--ds-color-icon-revision);
+}
+.statusIconButton[data-status='revision']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-revision-subtle);
+  --_color: var(--ds-color-icon-revision-hover);
+}
+.statusIconButton[data-status='revision']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-revision-subtle);
+  --_color: var(--ds-color-icon-revision-pressed);
+}

@@ -1,0 +1,199 @@
+/* ─── Base ─── */
+/* All stateful color properties route through local custom props so
+   hover/active/disabled only need to override the relevant variable. */
+.iconButton {
+  background-color: var(--_bg, transparent);
+  color: var(--_color, inherit);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: var(--_radius);
+  padding: var(--_padding);
+
+  cursor: pointer;
+  user-select: none;
+  outline-offset: 2px;
+  position: relative;
+
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+}
+
+.iconButton:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Sizes ─── */
+.iconButton[data-size='xs'] { --_padding: 0px;  width: 16px; height: 16px; }
+.iconButton[data-size='s']  { --_padding: 4px;  width: 24px; height: 24px; }
+.iconButton[data-size='m']  { --_padding: 6px;  width: 32px; height: 32px; }
+.iconButton[data-size='l']  { --_padding: 8px;  width: 40px; height: 40px; }
+.iconButton[data-size='xl'] { --_padding: 8px;  width: 48px; height: 48px; }
+
+/* ─── Shapes ─── */
+.iconButton[data-shape='circular'] { --_radius: var(--ds-border-radius-pill); }
+.iconButton[data-shape='square']   { --_radius: var(--ds-border-radius-l); }
+
+/* ─── Primary ─── */
+.iconButton[data-variant='primary'] {
+  --_bg:    var(--ds-color-fill-brand);
+  --_color: var(--ds-color-icon-inverse);
+}
+.iconButton[data-variant='primary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-brand-hover); }
+.iconButton[data-variant='primary']:active:not(:disabled) { --_bg: var(--ds-color-fill-brand-pressed); }
+.iconButton[data-variant='primary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Secondary ─── */
+.iconButton[data-variant='secondary'] {
+  --_bg:    var(--ds-color-fill-brand-subtle);
+  --_color: var(--ds-color-icon-brand);
+}
+.iconButton[data-variant='secondary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle-hover);
+  --_color: var(--ds-color-icon-brand-hover);
+}
+.iconButton[data-variant='secondary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle-pressed);
+  --_color: var(--ds-color-icon-brand-pressed);
+}
+.iconButton[data-variant='secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Tertiary ─── */
+.iconButton[data-variant='tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-icon-brand);
+}
+.iconButton[data-variant='tertiary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle);
+  --_color: var(--ds-color-icon-brand-hover);
+}
+.iconButton[data-variant='tertiary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-brand-subtle);
+  --_color: var(--ds-color-icon-brand-pressed);
+}
+.iconButton[data-variant='tertiary']:disabled { --_color: var(--ds-color-icon-disabled); }
+
+/* ─── Mono Primary ─── */
+.iconButton[data-variant='mono-primary'] {
+  --_bg:    var(--ds-color-fill-mono);
+  --_color: var(--ds-color-icon-inverse);
+}
+.iconButton[data-variant='mono-primary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-mono-hover); }
+.iconButton[data-variant='mono-primary']:active:not(:disabled) { --_bg: var(--ds-color-fill-mono-pressed); }
+.iconButton[data-variant='mono-primary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Mono Secondary ─── */
+.iconButton[data-variant='mono-secondary'] {
+  --_bg:    var(--ds-color-fill-neutral);
+  --_color: var(--ds-color-icon-primary);
+}
+.iconButton[data-variant='mono-secondary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-neutral-hover); }
+.iconButton[data-variant='mono-secondary']:active:not(:disabled) { --_bg: var(--ds-color-fill-neutral-pressed); }
+.iconButton[data-variant='mono-secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Mono Tertiary ─── */
+.iconButton[data-variant='mono-tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-icon-primary);
+}
+.iconButton[data-variant='mono-tertiary']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-neutral); }
+.iconButton[data-variant='mono-tertiary']:active:not(:disabled) { --_bg: var(--ds-color-fill-neutral); }
+.iconButton[data-variant='mono-tertiary']:disabled { --_color: var(--ds-color-icon-disabled); }
+
+/* ─── Destructive ─── */
+.iconButton[data-variant='destructive'] {
+  --_bg:    var(--ds-color-fill-error);
+  --_color: var(--ds-color-icon-inverse);
+}
+.iconButton[data-variant='destructive']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-error-hover); }
+.iconButton[data-variant='destructive']:active:not(:disabled) { --_bg: var(--ds-color-fill-error-pressed); }
+.iconButton[data-variant='destructive']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Destructive Secondary ─── */
+.iconButton[data-variant='destructive-secondary'] {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-icon-error);
+}
+.iconButton[data-variant='destructive-secondary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle-hover);
+  --_color: var(--ds-color-icon-error-hover);
+}
+.iconButton[data-variant='destructive-secondary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle-pressed);
+  --_color: var(--ds-color-icon-error-pressed);
+}
+.iconButton[data-variant='destructive-secondary']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Destructive Tertiary ─── */
+.iconButton[data-variant='destructive-tertiary'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-icon-error);
+}
+.iconButton[data-variant='destructive-tertiary']:hover:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-icon-error-hover);
+}
+.iconButton[data-variant='destructive-tertiary']:active:not(:disabled) {
+  --_bg:    var(--ds-color-fill-error-subtle);
+  --_color: var(--ds-color-icon-error-pressed);
+}
+.iconButton[data-variant='destructive-tertiary']:disabled { --_color: var(--ds-color-icon-disabled); }
+
+/* ─── Inverse ─── */
+.iconButton[data-variant='inverse'] {
+  --_bg:    transparent;
+  --_color: var(--ds-color-icon-inverse);
+}
+.iconButton[data-variant='inverse']:hover:not(:disabled)  { --_bg: var(--ds-color-fill-mono-hover); }
+.iconButton[data-variant='inverse']:active:not(:disabled) { --_bg: var(--ds-color-fill-mono-pressed); }
+.iconButton[data-variant='inverse']:disabled {
+  --_bg:    var(--ds-color-fill-disabled);
+  --_color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Loading spinner ─── */
+.spinner {
+  display: inline-block;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.iconButton[data-size='xs'] .spinner { width: 10px; height: 10px; border-width: 1.5px; }
+.iconButton[data-size='s']  .spinner { width: 12px; height: 12px; border-width: 1.5px; }
+.iconButton[data-size='m']  .spinner { width: 16px; height: 16px; }
+.iconButton[data-size='l']  .spinner { width: 20px; height: 20px; }
+.iconButton[data-size='xl'] .spinner { width: 24px; height: 24px; }
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

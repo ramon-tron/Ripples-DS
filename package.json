@@ -1,0 +1,8 @@
+{
+  "name": "design-system",
+  "private": true,
+  "scripts": {
+    "build": "npm --prefix tokens run build",
+    "tokens:build": "npm --prefix tokens run build"
+  }
+}

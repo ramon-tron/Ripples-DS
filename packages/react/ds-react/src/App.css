@@ -1,0 +1,85 @@
+.showcase {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--ds-spacing-3xl) var(--ds-spacing-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-3xl);
+}
+
+.showcase-header h1 {
+  font-size: var(--ds-font-size-5xl);
+  font-weight: var(--ds-font-weight-bold);
+  letter-spacing: var(--ds-letter-spacing-xs);
+  margin-bottom: var(--ds-spacing-s);
+}
+
+.showcase-subtitle {
+  font-size: var(--ds-font-size-l);
+  color: var(--ds-color-text-secondary);
+}
+
+.showcase-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-l);
+  padding-bottom: var(--ds-spacing-2xl);
+  border-bottom: var(--ds-border-width-xs) solid var(--ds-color-border-subtle);
+}
+.showcase-section:last-child {
+  border-bottom: none;
+}
+
+.showcase-section h2 {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-semi-bold);
+}
+
+.showcase-row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-m);
+  flex-wrap: wrap;
+}
+
+/* Variant grid: label | sm | md | lg | xl | disabled | loading */
+.variant-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-s);
+}
+
+.variant-grid-header,
+.variant-grid-row {
+  display: grid;
+  grid-template-columns: 180px repeat(6, 1fr);
+  align-items: center;
+  gap: var(--ds-spacing-s);
+}
+
+.variant-grid-header {
+  padding-bottom: var(--ds-spacing-2xs);
+  border-bottom: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+}
+
+.grid-size-label {
+  font-family: var(--ds-font-family-body);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-letter-spacing-button-tab);
+  text-align: center;
+}
+
+.variant-label {
+  font-family: var(--ds-font-family-body);
+  font-size: var(--ds-font-size-s);
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-color-text-secondary);
+  padding-right: var(--ds-spacing-m);
+}
+
+.variant-grid-row > button {
+  justify-self: center;
+}
