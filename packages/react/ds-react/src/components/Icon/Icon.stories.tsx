@@ -452,7 +452,31 @@ function IconsPage() {
 
 const meta: Meta = {
   title: 'Design Tokens/Iconography',
-  parameters: { layout: 'fullscreen' },
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        component: `
+A reference catalogue for all icons available in the Ripples design system.
+
+**Material Symbols** (Google's variable icon font) make up the primary icon set. Icons are rendered via the \`<Icon>\` component using the \`name\` prop (snake_case icon name), with controls for \`size\`, \`weight\`, \`fill\`, and \`grade\`.
+
+Available sizes map to fixed pixel dimensions: \`xs\` 12 px · \`s\` 16 px · \`m\` 20 px · \`l\` 24 px · \`xl\` 32 px.
+
+**Custom icons** — status and priority SVG icons specific to Ripples — are listed in the sections below the Material Symbols grid. These are imported as React components (e.g. \`<StatusInProgressIcon />\`) and used internally by **StatusIconButton**.
+
+**Usage guidance**
+- Click any icon tile to copy its name to the clipboard.
+- Use the size, weight, fill, and grade controls to preview how icons look across token combinations before choosing one.
+- Pass the copied name as the \`icon\` prop on **IconButton** or **MegaButton**, or as the \`name\` prop on the standalone \`<Icon>\` component.
+
+**When to use something else**
+- Use **StatusIconButton** when a status icon needs to be interactive.
+- Use custom status/priority SVG components directly only when building new icon-adjacent components — for interactive use prefer \`StatusIconButton\`.
+        `.trim(),
+      },
+    },
+  },
 };
 
 export default meta;

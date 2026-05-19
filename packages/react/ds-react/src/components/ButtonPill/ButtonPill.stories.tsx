@@ -8,7 +8,26 @@ const meta = {
   title: 'Components/ButtonPill',
   component: ButtonPill,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+A pill-shaped button (\`border-radius: 999px\`) for actions that benefit from a softer, more rounded form. Shares the same nine color variants as Button but does not include the Text family.
+
+Pill buttons are visually distinct from rectangular buttons, making them well-suited for:
+- Filter chips and category toggles
+- Quick-action tags on cards or list rows
+- Floating action areas where rounded shapes feel more approachable
+
+**When to use something else**
+- Use **Button** for primary CTAs in forms and dialogs — the rectangular shape carries more visual authority in those contexts.
+- Use **IconButton** when no text label is needed.
+- Avoid using both a leading and trailing icon on the same ButtonPill — choose one or neither.
+        `.trim(),
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',

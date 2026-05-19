@@ -8,7 +8,25 @@ const meta = {
   title: 'Components/StatusIconButton',
   component: StatusIconButton,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+A specialized icon button that renders a custom Ripples status icon to represent and trigger workflow status transitions. Each status value maps to a unique icon with its own semantic color.
+
+Available statuses: \`pending\`, \`in-progress\`, \`completed\`, \`approved\`, \`excluded\`, \`review\`, \`revision\`.
+
+Use this component on task rows, content cards, or any item that has a workflow status the user can view or change. The icon's shape and color communicate the current state at a glance — no label required.
+
+**When to use something else**
+- Use **IconButton** for generic icon-only actions that don't represent a workflow state.
+- Use a **Select** or **Dropdown** when users need to choose from the full list of statuses inline (e.g. bulk status change).
+- Use a read-only status icon (not a button) if the status is informational and not interactive.
+        `.trim(),
+      },
+    },
+  },
   argTypes: {
     status: {
       control: 'select',

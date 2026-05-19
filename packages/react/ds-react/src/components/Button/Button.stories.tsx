@@ -7,7 +7,29 @@ const meta = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+The standard action button for the Ripples design system. Use it for form submissions, dialog confirmations, and navigational CTAs where a clear text label is required.
+
+**Variant families**
+- **Brand** (\`primary\`, \`secondary\`, \`tertiary\`) — the main actions in a view. Limit to one \`primary\` per context.
+- **Mono** (\`mono-primary\`, \`mono-secondary\`, \`mono-tertiary\`) — use on neutral surfaces where brand color would compete with surrounding content.
+- **Destructive** (\`destructive\`, \`destructive-secondary\`, \`destructive-tertiary\`) — irreversible or high-risk actions such as deleting or revoking access.
+- **Text** (\`text\`, \`text-mono\`, \`text-destructive\`) — low-emphasis inline actions; rendered as text with no background or padding.
+
+**Sizes** (\`sm\`, \`md\`, \`lg\`, \`xl\`) map to fixed heights of 24 / 32 / 40 / 48 px. Default to \`md\` unless layout or hierarchy requires otherwise.
+
+**When to use something else**
+- Use **ButtonPill** when a pill-shaped form better suits the context (filters, tags, toggled selections).
+- Use **IconButton** when the action is self-evident from context and a text label would clutter the UI.
+- Use **MegaButton** for prominent launcher-style actions in toolbars or shortcut grids.
+        `.trim(),
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',

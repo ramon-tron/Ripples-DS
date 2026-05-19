@@ -8,7 +8,25 @@ const meta = {
   title: 'Components/IconButton',
   component: IconButton,
   tags: ['autodocs'],
-  parameters: { layout: 'centered' },
+  parameters: {
+    layout: 'centered',
+    docs: {
+      description: {
+        component: `
+A compact button that contains only a Material Symbols icon. Available in **circular** and **square** shapes across five sizes (\`xs\` → \`xl\`).
+
+Because there is no visible label, **always supply an \`aria-label\`** that describes the action — e.g. \`"Delete comment"\` rather than just \`"Delete"\`.
+
+**Variant families** match Button: Brand, Mono, Destructive, plus an **Inverse** variant for use on dark or high-contrast surfaces such as tooltips and dark headers.
+
+**When to use something else**
+- Use **Button** or **ButtonPill** when the action benefits from an explicit text label for clarity.
+- Use **StatusIconButton** when the icon specifically communicates a workflow status (pending, in-progress, approved, etc.).
+- Use **MegaButton** when a larger launcher-style touch target with a visible label is needed.
+        `.trim(),
+      },
+    },
+  },
   argTypes: {
     variant: {
       control: 'select',
