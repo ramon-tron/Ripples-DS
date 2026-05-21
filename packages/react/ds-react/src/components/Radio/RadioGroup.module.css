@@ -1,0 +1,11 @@
+.radioGroup {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-s);
+}
+
+.radioGroup[data-orientation='horizontal'] {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--ds-spacing-l);
+}

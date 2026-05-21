@@ -1,0 +1,115 @@
+/* ─── Root ─── */
+.checkbox {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--ds-spacing-xs);
+  cursor: pointer;
+  user-select: none;
+}
+
+.disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Control wrapper (sizes the hit area) ─── */
+.control {
+  position: relative;
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Native input — invisible but fully interactive and accessible */
+.input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  margin: 0;
+  cursor: inherit;
+  z-index: 1;
+}
+
+/* ─── Visual box ─── */
+.box {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--ds-color-border-subtle);
+  background-color: var(--ds-color-fill-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--ds-color-fill-brand);
+  transition:
+    border-color 100ms ease,
+    background-color 100ms ease;
+  pointer-events: none;
+}
+
+/* ─── Icons (hidden by default) ─── */
+.iconCheck,
+.iconIndeterminate {
+  position: absolute;
+  opacity: 0;
+  width: 12px;
+  height: 12px;
+  display: block;
+  flex-shrink: 0;
+  transition: opacity 100ms ease;
+}
+
+.iconIndeterminate {
+  width: 10px;
+  height: 2px;
+}
+
+/* ─── Hover ─── */
+.checkbox:not(.disabled):hover .box {
+  border-color: var(--ds-color-border-selected);
+  background-color: var(--ds-color-fill-brand-subtle);
+}
+
+/* ─── Focus ─── */
+.input:focus-visible + .box {
+  outline: 2px solid var(--ds-color-border-brand);
+  outline-offset: 2px;
+}
+
+/* ─── Checked ─── */
+.input:checked + .box {
+  border-color: var(--ds-color-border-selected);
+}
+
+.input:checked + .box .iconCheck {
+  opacity: 1;
+}
+
+/* ─── Indeterminate ─── */
+.input:indeterminate + .box {
+  border-color: var(--ds-color-border-selected);
+}
+
+.input:indeterminate + .box .iconIndeterminate {
+  opacity: 1;
+}
+
+/* ─── Disabled ─── */
+.input:disabled + .box {
+  background-color: var(--ds-color-fill-disabled);
+  border-color: var(--ds-color-border-more-subtle);
+  color: var(--ds-color-icon-disabled);
+}
+
+/* ─── Label text ─── */
+.label {
+  font-family: var(--ds-font-family-body);
+  font-size: var(--ds-font-size-m);
+  line-height: 20px;
+  color: var(--ds-color-text-primary);
+}
+
+.disabled .label {
+  color: var(--ds-color-text-disabled);
+}

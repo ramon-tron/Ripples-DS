@@ -1,5 +1,10 @@
 export { Button } from './Button/Button';
 export { ButtonPill } from './ButtonPill/ButtonPill';
+export { ButtonGroup } from './ButtonGroup/ButtonGroup';
+export { ButtonPillGroup } from './ButtonPillGroup/ButtonPillGroup';
+export { Checkbox } from './Checkbox/Checkbox';
+export { Radio } from './Radio/Radio';
+export { RadioGroup } from './Radio/RadioGroup';
 export { MegaButton } from './MegaButton/MegaButton';
 export { Badge } from './Badge/Badge';
 export { Input } from './Input/Input';

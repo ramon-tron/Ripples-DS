@@ -1,0 +1,7 @@
+.buttonPillGroup {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-s);
+  align-items: center;
+}
