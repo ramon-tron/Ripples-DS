@@ -13,3 +13,5 @@ export type { ChipProps, ChipSize } from './Chip/Chip';
 export { Label } from './Label/Label';
 export type { LabelProps, LabelVariant, LabelAppearance, LabelSize } from './Label/Label';
 export { Input } from './Input/Input';
+export { PaymentLabel } from './PaymentLabel/PaymentLabel';
+export type { PaymentLabelProps, PaymentLabelType, PaymentLabelSize } from './PaymentLabel/PaymentLabel';

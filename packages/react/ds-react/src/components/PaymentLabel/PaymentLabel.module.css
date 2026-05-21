@@ -1,0 +1,58 @@
+/* ─── Root ─── */
+.paymentLabel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-border-radius-xs);
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+/* ─── Types ─── */
+
+/* Outlined — success border, success text, transparent bg */
+.pending {
+  border-color: var(--ds-color-border-success);
+  color: var(--ds-color-text-success);
+  background-color: transparent;
+}
+
+/* Filled — solid success bg, white text */
+.paid {
+  background-color: var(--ds-color-fill-success);
+  color: var(--ds-color-text-primary-inverse);
+}
+
+/* Subtle — light success bg, success text */
+.partial {
+  background-color: var(--ds-color-fill-success-subtle);
+  color: var(--ds-color-text-success);
+}
+
+/* Neutral — gray bg, muted text */
+.none {
+  background-color: var(--ds-color-fill-neutral);
+  color: var(--ds-color-text-tertiary-inverse);
+}
+
+/* ─── Sizes ─── */
+
+/* Default — body/l/bold, 16px */
+.md {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  font-family: var(--ds-body-l-bold-font-family);
+  font-size: var(--ds-body-l-bold-font-size);
+  line-height: var(--ds-body-l-bold-line-height);
+  letter-spacing: var(--ds-body-l-bold-letter-spacing);
+  font-weight: var(--ds-body-l-bold-font-weight);
+}
+
+/* Small — body/s/bold, 12px */
+.sm {
+  padding: var(--ds-spacing-3xs) var(--ds-spacing-xs);
+  font-family: var(--ds-body-s-bold-font-family);
+  font-size: var(--ds-body-s-bold-font-size);
+  line-height: var(--ds-body-s-bold-line-height);
+  letter-spacing: var(--ds-body-s-bold-letter-spacing);
+  font-weight: var(--ds-body-s-bold-font-weight);
+}
