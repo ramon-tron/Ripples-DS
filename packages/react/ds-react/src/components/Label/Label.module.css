@@ -1,0 +1,127 @@
+/* ─── Root ─── */
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xs);
+  border-radius: var(--ds-border-radius-xs);
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  /* Resolved per variant */
+  --_fill:      var(--ds-color-fill-inverse);
+  --_subtle-bg: var(--ds-color-fill-neutral);
+  --_text:      var(--ds-color-text-secondary);
+  --_border:    var(--ds-color-text-primary);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+
+/* ─── Sizes (typography from labels tokens) ─── */
+.lg {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  font-family: var(--ds-labels-l-bold-font-family);
+  font-size: var(--ds-labels-l-bold-font-size);
+  line-height: var(--ds-labels-l-bold-line-height);
+  letter-spacing: var(--ds-labels-l-bold-letter-spacing);
+  font-weight: var(--ds-labels-l-bold-font-weight);
+}
+
+.md {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  font-family: var(--ds-labels-m-bold-font-family);
+  font-size: var(--ds-labels-m-bold-font-size);
+  line-height: var(--ds-labels-m-bold-line-height);
+  letter-spacing: var(--ds-labels-m-bold-letter-spacing);
+  font-weight: var(--ds-labels-m-bold-font-weight);
+}
+
+.sm {
+  padding: var(--ds-spacing-3xs) var(--ds-spacing-xs);
+  font-family: var(--ds-labels-s-bold-font-family);
+  font-size: var(--ds-labels-s-bold-font-size);
+  line-height: var(--ds-labels-s-bold-line-height);
+  letter-spacing: var(--ds-labels-s-bold-letter-spacing);
+  font-weight: var(--ds-labels-s-bold-font-weight);
+}
+
+/* ─── Color variants ─── */
+.default {
+  --_fill:      var(--ds-color-fill-inverse);
+  --_subtle-bg: var(--ds-color-fill-neutral);
+  --_text:      var(--ds-color-text-primary);
+  --_border:    var(--ds-color-text-primary);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.brand {
+  --_fill:      var(--ds-color-fill-brand);
+  --_subtle-bg: var(--ds-color-fill-brand-subtle);
+  --_text:      var(--ds-color-text-brand);
+  --_border:    var(--ds-color-border-brand);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.success {
+  --_fill:      var(--ds-color-fill-success);
+  --_subtle-bg: var(--ds-color-fill-success-subtle);
+  --_text:      var(--ds-color-text-success);
+  --_border:    var(--ds-color-border-success);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.error {
+  --_fill:      var(--ds-color-fill-error);
+  --_subtle-bg: var(--ds-color-fill-error-subtle);
+  --_text:      var(--ds-color-text-error);
+  --_border:    var(--ds-color-border-error);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.alert {
+  --_fill:      var(--ds-color-fill-alert);
+  --_subtle-bg: var(--ds-color-fill-alert-subtle);
+  --_text:      var(--ds-color-text-alert);
+  --_border:    var(--ds-color-border-alert);
+  --_text-on-fill: var(--ds-color-text-alert-pressed);
+}
+.info {
+  --_fill:      var(--ds-color-fill-info);
+  --_subtle-bg: var(--ds-color-fill-info-subtle);
+  --_text:      var(--ds-color-text-info);
+  --_border:    var(--ds-color-border-info);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.revision {
+  --_fill:      var(--ds-color-fill-revision);
+  --_subtle-bg: var(--ds-color-fill-revision-subtle);
+  --_text:      var(--ds-color-text-revision);
+  --_border:    var(--ds-color-border-revision);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.completed {
+  --_fill:      var(--ds-color-fill-completed);
+  --_subtle-bg: var(--ds-color-fill-completed-subtle);
+  --_text:      var(--ds-color-text-completed);
+  --_border:    var(--ds-color-border-completed);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+.review {
+  --_fill:      var(--ds-color-fill-review);
+  --_subtle-bg: var(--ds-color-fill-review-subtle);
+  --_text:      var(--ds-color-text-review);
+  --_border:    var(--ds-color-border-review);
+  --_text-on-fill: var(--ds-color-text-primary-inverse);
+}
+
+/* ─── Appearances ─── */
+.subtle {
+  background-color: var(--_subtle-bg);
+  color: var(--_text);
+  border-color: transparent;
+}
+.filled {
+  background-color: var(--_fill);
+  color: var(--_text-on-fill);
+  border-color: transparent;
+}
+.outlined {
+  background-color: transparent;
+  color: var(--_text);
+  border-color: var(--_border);
+}

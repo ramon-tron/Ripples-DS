@@ -1,0 +1,95 @@
+/* ─── Root ─── */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ─── Image ─── */
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ─── Initials ─── */
+.initials {
+  line-height: 1;
+  text-align: center;
+}
+
+/* ─── Sizes + typography tokens ─── */
+
+/* Extra-Large 80px — Montserrat Black */
+.xl {
+  width: var(--ds-spacing-8xl);
+  height: var(--ds-spacing-8xl);
+  font-family: var(--ds-headline-l-black-font-family);
+  font-size: var(--ds-headline-l-black-font-size);
+  line-height: var(--ds-headline-l-black-line-height);
+  letter-spacing: var(--ds-headline-l-black-letter-spacing);
+  font-weight: var(--ds-headline-l-black-font-weight);
+}
+
+/* Large 56px — Montserrat Extra-Bold */
+.lg {
+  width: var(--ds-spacing-5xl);
+  height: var(--ds-spacing-5xl);
+  font-family: var(--ds-headline-s-extra-bold-font-family);
+  font-size: var(--ds-headline-s-extra-bold-font-size);
+  line-height: var(--ds-headline-s-extra-bold-line-height);
+  letter-spacing: var(--ds-headline-s-extra-bold-letter-spacing);
+  font-weight: var(--ds-headline-s-extra-bold-font-weight);
+}
+
+/* Medium 40px — Montserrat Extra-Bold */
+.md {
+  width: var(--ds-spacing-3xl);
+  height: var(--ds-spacing-3xl);
+  font-family: var(--ds-headline-2xs-extra-bold-font-family);
+  font-size: var(--ds-headline-2xs-extra-bold-font-size);
+  line-height: var(--ds-headline-2xs-extra-bold-line-height);
+  letter-spacing: var(--ds-headline-2xs-extra-bold-letter-spacing);
+  font-weight: var(--ds-headline-2xs-extra-bold-font-weight);
+}
+
+/* Small 24px — Work Sans Bold */
+.sm {
+  width: var(--ds-spacing-xl);
+  height: var(--ds-spacing-xl);
+  font-family: var(--ds-labels-m-bold-font-family);
+  font-size: var(--ds-labels-m-bold-font-size);
+  line-height: var(--ds-labels-m-bold-line-height);
+  letter-spacing: var(--ds-labels-m-bold-letter-spacing);
+  font-weight: var(--ds-labels-m-bold-font-weight);
+}
+
+/* Extra-Small 16px — Work Sans Bold */
+.xs {
+  width: var(--ds-spacing-l);
+  height: var(--ds-spacing-l);
+  font-family: var(--ds-labels-s-bold-font-family);
+  font-size: var(--ds-labels-s-bold-font-size);
+  line-height: var(--ds-labels-s-bold-line-height);
+  letter-spacing: var(--ds-labels-s-bold-letter-spacing);
+  font-weight: var(--ds-labels-s-bold-font-weight);
+}
+
+/* ─── Color classes — saturated ─── */
+.color-1 { background-color: var(--ds-color-fill-avatar1); color: var(--ds-color-text-primary-inverse); }
+.color-2 { background-color: var(--ds-color-fill-avatar2); color: var(--ds-color-text-primary-inverse); }
+.color-3 { background-color: var(--ds-color-fill-avatar3); color: var(--ds-color-text-primary-inverse); }
+.color-4 { background-color: var(--ds-color-fill-avatar4); color: var(--ds-color-text-primary-inverse); }
+.color-5 { background-color: var(--ds-color-fill-avatar5); color: var(--ds-color-text-avatar5); }
+
+/* ─── Color classes — subtle ─── */
+.color-1-subtle { background-color: var(--ds-color-fill-avatar1-subtle); color: var(--ds-color-text-avatar1-subtle); }
+.color-2-subtle { background-color: var(--ds-color-fill-avatar2-subtle); color: var(--ds-color-text-avatar2-subtle); }
+.color-3-subtle { background-color: var(--ds-color-fill-avatar3-subtle); color: var(--ds-color-text-avatar3-subtle); }
+.color-4-subtle { background-color: var(--ds-color-fill-avatar4-subtle); color: var(--ds-color-text-avatar4-subtle); }
+.color-5-subtle { background-color: var(--ds-color-fill-avatar5-subtle); color: var(--ds-color-text-avatar5-subtle); }

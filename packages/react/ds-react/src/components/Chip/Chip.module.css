@@ -1,0 +1,87 @@
+/* ─── Root ─── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--ds-border-radius-pill);
+  border: 1px solid var(--ds-color-border-subtle);
+  background-color: var(--ds-color-fill-primary);
+  color: var(--ds-color-text-primary);
+  white-space: nowrap;
+  user-select: none;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+/* ─── Hover ─── */
+.chip:hover:not(.disabled):not(.selected) {
+  background-color: var(--ds-color-fill-neutral-hover);
+}
+
+/* ─── Pressed ─── */
+.chip:active:not(.disabled):not(.selected) {
+  background-color: var(--ds-color-fill-neutral-pressed);
+}
+
+/* ─── Selected ─── */
+.selected {
+  background-color: var(--ds-color-fill-brand-subtle);
+  border-color: transparent;
+}
+
+.selected:hover:not(.disabled) {
+  background-color: var(--ds-color-fill-brand-subtle-hover);
+}
+
+.selected:active:not(.disabled) {
+  background-color: var(--ds-color-fill-brand-subtle-pressed);
+}
+
+/* ─── Disabled ─── */
+.disabled {
+  background-color: var(--ds-color-fill-disabled);
+  border-color: var(--ds-color-border-subtle);
+  color: var(--ds-color-text-disabled);
+  pointer-events: none;
+}
+
+/* ─── Default size (Figma "Default") ─── */
+.md {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  gap: var(--ds-spacing-2xs);
+  font-family: var(--ds-chips-m-medium-font-family);
+  font-size: var(--ds-chips-m-medium-font-size);
+  line-height: var(--ds-chips-m-medium-line-height);
+  letter-spacing: var(--ds-chips-m-medium-letter-spacing);
+  font-weight: var(--ds-chips-m-medium-font-weight);
+}
+
+/* ─── Small size (Figma "Small") ─── */
+.sm {
+  padding: var(--ds-spacing-3xs) var(--ds-spacing-s);
+  gap: var(--ds-spacing-2xs);
+  font-family: var(--ds-chips-s-medium-font-family);
+  font-size: var(--ds-chips-s-medium-font-size);
+  line-height: var(--ds-chips-s-medium-line-height);
+  letter-spacing: var(--ds-chips-s-medium-letter-spacing);
+  font-weight: var(--ds-chips-s-medium-font-weight);
+}
+
+/* ─── Reduce left padding when a leading icon/avatar is present ─── */
+.md.hasLeading { padding-left: var(--ds-spacing-2xs); }
+.sm.hasLeading { padding-left: var(--ds-spacing-2xs); }
+
+/* ─── Reduce right padding when dismiss button is present ─── */
+.md.hasDismiss { padding-right: var(--ds-spacing-2xs); }
+.sm.hasDismiss { padding-right: var(--ds-spacing-3xs); }
+
+/* ─── Avatar slot ─── */
+.avatarSlot {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ─── Label text ─── */
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
