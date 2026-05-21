@@ -1,0 +1,43 @@
+/* ─── Base ─── */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* ─── Speaker number label ─── */
+.label {
+  font-family: var(--ds-labels-m-bold-font-family);
+  font-size: var(--ds-labels-m-bold-font-size);
+  line-height: var(--ds-labels-m-bold-line-height);
+  letter-spacing: var(--ds-labels-m-bold-letter-spacing);
+  font-weight: var(--ds-labels-m-bold-font-weight);
+  text-align: center;
+}
+
+/* ─── Human speakers — subtle (S1–S5) ─── */
+.s1  { background-color: var(--ds-color-fill-avatar1-subtle); color: var(--ds-color-text-avatar1-subtle); }
+.s2  { background-color: var(--ds-color-fill-avatar2-subtle); color: var(--ds-color-text-avatar2-subtle); }
+.s3  { background-color: var(--ds-color-fill-avatar3-subtle); color: var(--ds-color-text-avatar3-subtle); }
+.s4  { background-color: var(--ds-color-fill-avatar4-subtle); color: var(--ds-color-text-avatar4-subtle); }
+.s5  { background-color: var(--ds-color-fill-avatar5-subtle); color: var(--ds-color-text-avatar5-subtle); }
+
+/* ─── Human speakers — saturated (S6–S10) ─── */
+.s6  { background-color: var(--ds-color-fill-avatar1); color: var(--ds-color-text-primary-inverse); }
+.s7  { background-color: var(--ds-color-fill-avatar2); color: var(--ds-color-text-primary-inverse); }
+.s8  { background-color: var(--ds-color-fill-avatar3); color: var(--ds-color-text-primary-inverse); }
+.s9  { background-color: var(--ds-color-fill-avatar4); color: var(--ds-color-text-primary-inverse); }
+.s10 { background-color: var(--ds-color-fill-avatar5); color: var(--ds-color-text-avatar5); }
+
+/* ─── Non-human / device speakers ─── */
+.device {
+  background-color: var(--ds-color-fill-primary);
+  border: 0.5px solid var(--ds-color-border-subtle);
+  padding: var(--ds-spacing-2xs);
+  color: var(--ds-color-text-secondary);
+}

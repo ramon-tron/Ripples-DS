@@ -1,0 +1,49 @@
+/* ─── Root ─── */
+.statusChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-3xs);
+  border-radius: var(--ds-border-radius-pill);
+  border: 1px solid transparent;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* ─── Types ─── */
+
+.at-risk {
+  background-color: var(--ds-color-fill-alert-subtle);
+  border-color: var(--ds-color-border-alert);
+  color: var(--ds-color-text-primary);
+}
+
+.excluded {
+  background-color: var(--ds-color-fill-error-subtle);
+  border-color: var(--ds-color-border-error);
+  color: var(--ds-color-text-primary);
+}
+
+/* ─── Sizes ─── */
+
+.md {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s) var(--ds-spacing-2xs) var(--ds-spacing-2xs);
+  font-family: var(--ds-chips-m-medium-font-family);
+  font-size: var(--ds-chips-m-medium-font-size);
+  line-height: var(--ds-chips-m-medium-line-height);
+  letter-spacing: var(--ds-chips-m-medium-letter-spacing);
+  font-weight: var(--ds-chips-m-medium-font-weight);
+}
+
+.sm {
+  padding: var(--ds-spacing-3xs) var(--ds-spacing-s) var(--ds-spacing-3xs) var(--ds-spacing-2xs);
+  font-family: var(--ds-chips-s-medium-font-family);
+  font-size: var(--ds-chips-s-medium-font-size);
+  line-height: var(--ds-chips-s-medium-line-height);
+  letter-spacing: var(--ds-chips-s-medium-letter-spacing);
+  font-weight: var(--ds-chips-s-medium-font-weight);
+}
+
+/* ─── Label ─── */
+.label {
+  line-height: 1;
+}

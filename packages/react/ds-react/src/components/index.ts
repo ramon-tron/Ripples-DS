@@ -15,3 +15,7 @@ export type { LabelProps, LabelVariant, LabelAppearance, LabelSize } from './Lab
 export { Input } from './Input/Input';
 export { PaymentLabel } from './PaymentLabel/PaymentLabel';
 export type { PaymentLabelProps, PaymentLabelType, PaymentLabelSize } from './PaymentLabel/PaymentLabel';
+export { StatusChip } from './StatusChip/StatusChip';
+export type { StatusChipProps, StatusChipType, StatusChipSize } from './StatusChip/StatusChip';
+export { TranscriptAvatar } from './TranscriptAvatar/TranscriptAvatar';
+export type { TranscriptAvatarProps, TranscriptSpeaker } from './TranscriptAvatar/TranscriptAvatar';
