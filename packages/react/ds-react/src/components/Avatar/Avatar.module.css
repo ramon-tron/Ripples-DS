@@ -93,3 +93,6 @@
 .color-3-subtle { background-color: var(--ds-color-fill-avatar3-subtle); color: var(--ds-color-text-avatar3-subtle); }
 .color-4-subtle { background-color: var(--ds-color-fill-avatar4-subtle); color: var(--ds-color-text-avatar4-subtle); }
 .color-5-subtle { background-color: var(--ds-color-fill-avatar5-subtle); color: var(--ds-color-text-avatar5-subtle); }
+
+/* ─── Overflow count slot ─── */
+.overflow { background-color: var(--ds-color-fill-neutral); color: var(--ds-color-text-secondary); }

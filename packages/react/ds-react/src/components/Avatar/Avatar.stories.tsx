@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import React from 'react';
 import { Avatar } from './Avatar';
+import { AvatarGroup } from './AvatarGroup';
 
 // Cat photos for the stories 🐱
 const CAT_PARTY   = '/party-cat.png';
@@ -201,34 +202,57 @@ export const InitialsFallback: Story = {
 
 // ─── Stacked Group ────────────────────────────────────────────────────────────
 
+const ALL_CATS = [
+  { src: CAT_PARTY,   initials: 'WW', alt: 'Whiskers McParty'  },
+  { src: CAT_ORANGE,  initials: 'OT', alt: 'Orange Tabby'      },
+  { src: CAT_SLEEPY,  initials: 'SB', alt: 'Sir Sleepsalot'    },
+  { src: CAT_CURIOUS, initials: 'CQ', alt: 'Curiosity Cat'     },
+  { src: CAT_FANCY,   initials: 'FC', alt: 'Fancypaws III'     },
+  { initials: 'MK', alt: 'Mittens Kowalski' },
+  { initials: 'TC', alt: 'Thundercat'       },
+  { initials: 'NB', alt: 'Noodle Bean'      },
+];
+
 export const StackedGroup: Story = {
   name: 'Stacked Group',
   parameters: {
     controls: { disable: true },
     docs: {
-      description: { story: 'Overlap avatars to represent a team or set of assignees.' },
+      description: { story: 'Overlap avatars to represent a team or set of assignees. When the count exceeds `max`, the last slot becomes a `+N` overflow indicator.' },
     },
   },
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'center' }}>
-      {[CAT_PARTY, CAT_ORANGE, CAT_SLEEPY, CAT_CURIOUS, CAT_FANCY].map((src, i) => (
-        <div key={src} style={{ marginLeft: i === 0 ? 0 : -10, zIndex: 5 - i, position: 'relative' }}>
-          <Avatar
-            src={src}
-            alt="Cat team member"
-            size="md"
-            style={{ outline: '2px solid var(--ds-color-fill-primary)' }}
-          />
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)' }}>No overflow (5 of 5)</span>
+        <AvatarGroup avatars={ALL_CATS.slice(0, 5)} max={5} size="md" />
+      </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)' }}>With overflow (max=5, 8 total)</span>
+        <AvatarGroup avatars={ALL_CATS} max={5} size="md" />
+      </div>
+    </div>
+  ),
+};
+
+// ─── AvatarGroup Sizes ────────────────────────────────────────────────────────
+
+export const AvatarGroupSizes: Story = {
+  name: 'AvatarGroup Sizes',
+  parameters: {
+    controls: { disable: true },
+    docs: {
+      description: { story: 'AvatarGroup scales with the same size tokens as Avatar.' },
+    },
+  },
+  render: () => (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+      {(['xl', 'lg', 'md', 'sm', 'xs'] as const).map(size => (
+        <div key={size} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+          <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)', width: 24 }}>{size}</span>
+          <AvatarGroup avatars={ALL_CATS} max={5} size={size} />
         </div>
       ))}
-      <span style={{
-        marginLeft: 10,
-        fontSize: 13,
-        color: 'var(--ds-color-text-secondary)',
-        fontFamily: 'var(--ds-font-family-body)',
-      }}>
-        +3 more cats
-      </span>
     </div>
   ),
 };

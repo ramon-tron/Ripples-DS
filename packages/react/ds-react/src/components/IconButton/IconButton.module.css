@@ -41,7 +41,7 @@
 
 /* ─── Shapes ─── */
 .iconButton[data-shape='circular'] { --_radius: var(--ds-border-radius-pill); }
-.iconButton[data-shape='square']   { --_radius: var(--ds-border-radius-l); }
+.iconButton[data-shape='square']   { --_radius: var(--ds-border-radius-s); }
 
 /* ─── Primary ─── */
 .iconButton[data-variant='primary'] {
