@@ -1,0 +1,421 @@
+/* ─── Wrapper ─── */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-2xs);
+  width: 100%;
+  min-width: 0;
+}
+
+.wrapperMini {
+  width: fit-content;
+}
+
+/* ─── Label row ─── */
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xs);
+}
+
+.label {
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+  letter-spacing: var(--ds-body-s-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+  cursor: pointer;
+}
+
+.labelDisabled {
+  color: var(--ds-color-text-disabled);
+}
+
+.helpIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-3xs);
+  border-radius: var(--ds-border-radius-circle);
+  color: var(--ds-color-text-tertiary);
+}
+
+.helpIconWrapDisabled {
+  background-color: var(--ds-color-fill-disabled);
+  color: var(--ds-color-text-disabled);
+}
+
+/* ─── Trigger ─── */
+.trigger {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  width: 100%;
+  box-sizing: border-box;
+  background-color: var(--ds-color-fill-primary);
+  border: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+  border-radius: var(--ds-border-radius-s);
+  cursor: pointer;
+  text-align: left;
+  overflow: hidden;
+  box-shadow: 0 0 0 3px transparent;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  outline: none;
+  user-select: none;
+}
+
+/* Size variants */
+.triggerDefault {
+  padding: var(--ds-spacing-m) 14px;
+}
+
+.triggerSm {
+  padding: var(--ds-spacing-s) var(--ds-spacing-m);
+}
+
+.triggerMiniDefault {
+  padding: 6px var(--ds-spacing-m);
+}
+
+.triggerMiniSm {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-m);
+}
+
+/* States */
+.trigger:focus-visible:not(.triggerDisabled) {
+  border-color: var(--ds-color-border-selected);
+  box-shadow: 0 0 0 3px var(--ds-color-fill-brand-subtle);
+}
+
+.triggerOpen:not(.triggerError):not(.triggerDisabled) {
+  border-color: var(--ds-color-border-selected);
+  box-shadow: 0 0 0 3px var(--ds-color-fill-brand-subtle);
+}
+
+.triggerError {
+  border-color: var(--ds-color-border-error);
+}
+
+.triggerError.triggerOpen:not(.triggerDisabled) {
+  box-shadow: 0 0 0 3px var(--ds-color-fill-error-subtle);
+}
+
+.triggerDisabled {
+  background-color: var(--ds-color-fill-disabled);
+  cursor: not-allowed;
+  border-color: var(--ds-color-border-more-subtle);
+}
+
+/* ─── Tags trigger inner layout ─── */
+/* The chips row is clipped with a feather, matching the Figma design */
+.tagsContent {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.chipsRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xs);
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+  /* Feather fade on right edge so overflowing chips gracefully clip */
+  -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  mask-image: linear-gradient(to right, black 70%, transparent 100%);
+}
+
+.clearAllBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--ds-color-icon-secondary);
+  border-radius: var(--ds-border-radius-xs);
+  flex-shrink: 0;
+  transition: color 100ms ease, background-color 100ms ease;
+}
+
+.clearAllBtn:hover:not(:disabled) {
+  color: var(--ds-color-icon-primary);
+  background-color: var(--ds-color-fill-neutral);
+}
+
+.clearAllBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ─── Trigger text ─── */
+.triggerText {
+  flex: 1 0 0;
+  min-width: 0;
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.triggerPlaceholder {
+  color: var(--ds-color-text-placeholder);
+}
+
+/* ─── Search input inside trigger ─── */
+.searchInput {
+  flex: 1 0 0;
+  min-width: 0;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--ds-color-text-placeholder);
+}
+
+/* ─── Tags input (inside trigger for tags type) ─── */
+.tagsInput {
+  flex: 1 0 0;
+  min-width: 80px;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0;
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+}
+
+.tagsInput::placeholder {
+  color: var(--ds-color-text-placeholder);
+}
+
+.tagsInput:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Search action button ─── */
+.actionDivider {
+  width: var(--ds-border-width-xs);
+  height: 24px;
+  align-self: center;
+  flex-shrink: 0;
+  background-color: var(--ds-color-border-subtle);
+}
+
+.actionBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-l);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--ds-color-text-secondary);
+  flex-shrink: 0;
+  transition: background-color 100ms ease;
+}
+
+.actionBtn:hover {
+  background-color: var(--ds-color-fill-neutral);
+}
+
+/* ─── Helper text ─── */
+.helperText {
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+  letter-spacing: var(--ds-body-s-regular-letter-spacing);
+  color: var(--ds-color-text-secondary);
+}
+
+.helperTextError {
+  color: var(--ds-color-text-error);
+}
+
+/* ─── Dropdown menu (portal) ─── */
+.menu {
+  background-color: var(--ds-color-fill-primary);
+  border: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+  border-radius: var(--ds-border-radius-s);
+  box-shadow:
+    0 0 6px rgba(0, 0, 0, 0.08),
+    0 10px 16px -4px rgba(0, 0, 0, 0.1);
+  max-height: 320px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.menuInner {
+  display: flex;
+  flex-direction: column;
+  padding: var(--ds-spacing-s) var(--ds-spacing-2xs);
+  gap: 4px;
+}
+
+/* ─── Menu item ─── */
+.menuItem {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  padding: 10px 12px;
+  border-radius: var(--ds-border-radius-s);
+  cursor: pointer;
+  outline: none;
+  flex-shrink: 0;
+  /* Local bg var — inherited by ::after feather */
+  --_bg: var(--ds-color-fill-primary);
+  background-color: var(--_bg);
+  transition: background-color 100ms ease;
+}
+
+.menuItem:hover:not(.menuItemDisabled),
+.menuItem:focus:not(.menuItemDisabled) {
+  --_bg: var(--ds-color-fill-neutral);
+  background-color: var(--_bg);
+}
+
+.menuItemDisabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.menuItemContent {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2xs);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.menuItemTextLead {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+/* Text container with feather overflow */
+.menuItemTexts {
+  display: flex;
+  align-items: baseline;
+  gap: var(--ds-spacing-s);
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  position: relative;
+}
+
+/* Feather overflow gradient — color matches item background */
+.menuItemTexts::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  background: linear-gradient(to right, transparent, var(--_bg, var(--ds-color-fill-primary)));
+  pointer-events: none;
+}
+
+.menuItemLabel {
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+  flex-shrink: 0;
+}
+
+.menuItemSupporting {
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-secondary);
+  flex-shrink: 0;
+}
+
+/* ─── Section header ─── */
+.sectionHeader {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 28px;
+  padding: 8px 12px 0;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sectionHeaderDivider {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 36px;
+  padding: 16px 12px 0;
+  flex-shrink: 0;
+  overflow: hidden;
+  border-top: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+}
+
+.sectionHeaderContent {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+}
+
+.sectionHeaderLabel {
+  font-family: var(--ds-labels-m-bold-font-family);
+  font-size: var(--ds-labels-m-bold-font-size);
+  font-weight: var(--ds-labels-m-bold-font-weight);
+  line-height: var(--ds-labels-m-bold-line-height);
+  letter-spacing: var(--ds-labels-m-bold-letter-spacing);
+  text-transform: uppercase;
+  color: var(--ds-color-text-secondary);
+}
+
+/* ─── Divider ─── */
+.menuDivider {
+  height: 1px;
+  background-color: var(--ds-color-border-more-subtle);
+  margin: 0 12px;
+  flex-shrink: 0;
+}
+
+/* ─── Empty search state ─── */
+.menuEmpty {
+  padding: var(--ds-spacing-m) 12px;
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  color: var(--ds-color-text-secondary);
+  text-align: center;
+}

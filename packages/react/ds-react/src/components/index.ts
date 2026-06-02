@@ -22,3 +22,5 @@ export { StatusChip } from './StatusChip/StatusChip';
 export type { StatusChipProps, StatusChipType, StatusChipSize } from './StatusChip/StatusChip';
 export { TranscriptAvatar } from './TranscriptAvatar/TranscriptAvatar';
 export type { TranscriptAvatarProps, TranscriptSpeaker } from './TranscriptAvatar/TranscriptAvatar';
+export { Dropdown } from './Dropdown/Dropdown';
+export type { DropdownProps, DropdownType, DropdownSize, DropdownItem, DropdownOptionItem, DropdownSectionItem, DropdownDividerItem } from './Dropdown/Dropdown';
