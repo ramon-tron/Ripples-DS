@@ -1,0 +1,139 @@
+/* ─── Root container ─── */
+.root {
+  display: inline-flex;
+  align-items: stretch;
+  position: relative;
+}
+
+.rootFramed {
+  background-color: var(--ds-color-fill-primary);
+  border: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+}
+
+.rootMedium {
+  border-radius: var(--ds-border-radius-s);
+}
+
+.rootSmall {
+  border-radius: var(--ds-border-radius-xs);
+}
+
+/* ─── Option slot ─── */
+.option {
+  flex: 1 0 0;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+  position: relative;
+}
+
+/* Left-border separator between options (framed only) */
+.optionSeparator {
+  border-left: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+}
+
+/* ─── Text button base ─── */
+.btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  text-transform: uppercase;
+  text-align: center;
+  outline: none;
+  user-select: none;
+  transition: background-color 120ms ease, color 120ms ease;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+  outline-offset: -2px;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* ─── Text button sizes ─── */
+.btnMedium {
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-s);
+  min-height: 32px;
+  font-family: var(--ds-button-md-font-family);
+  font-size: var(--ds-button-md-font-size);
+  font-weight: var(--ds-button-md-font-weight);
+  line-height: var(--ds-button-md-line-height);
+  letter-spacing: var(--ds-button-md-letter-spacing);
+}
+
+.btnSmall {
+  padding: 0 var(--ds-spacing-xs);
+  min-height: 24px;
+  font-family: var(--ds-button-sm-font-family);
+  font-size: var(--ds-button-sm-font-size);
+  font-weight: var(--ds-button-sm-font-weight);
+  line-height: var(--ds-button-sm-line-height);
+  letter-spacing: var(--ds-button-sm-letter-spacing);
+}
+
+/* ─── Text button states ─── */
+.btnUnselected {
+  color: var(--ds-color-text-primary);
+}
+
+.btnUnselected:hover:not(:disabled) {
+  background-color: var(--ds-color-fill-neutral);
+}
+
+.btnSelected {
+  background-color: var(--ds-color-fill-neutral);
+  color: var(--ds-color-text-secondary);
+}
+
+.btnSelected:hover:not(:disabled) {
+  background-color: var(--ds-color-fill-neutral-hover);
+}
+
+/* ─── Border-radius: framed edge buttons ─── */
+/* First button in framed style — left corners only */
+.rootMedium .btnFirst {
+  border-radius: var(--ds-border-radius-s) 0 0 var(--ds-border-radius-s);
+}
+
+.rootSmall .btnFirst {
+  border-radius: var(--ds-border-radius-xs) 0 0 var(--ds-border-radius-xs);
+}
+
+/* Last button in framed style — right corners only */
+.rootMedium .btnLast {
+  border-radius: 0 var(--ds-border-radius-s) var(--ds-border-radius-s) 0;
+}
+
+.rootSmall .btnLast {
+  border-radius: 0 var(--ds-border-radius-xs) var(--ds-border-radius-xs) 0;
+}
+
+/* When there's only one button, it gets both sides */
+.rootMedium .btnFirst.btnLast {
+  border-radius: var(--ds-border-radius-s);
+}
+
+.rootSmall .btnFirst.btnLast {
+  border-radius: var(--ds-border-radius-xs);
+}
+
+/* ─── Border-radius: frameless buttons ─── */
+/* Each button is independently rounded in frameless style */
+.rootMedium .btnFrameless {
+  border-radius: var(--ds-border-radius-s);
+}
+
+.rootSmall .btnFrameless {
+  border-radius: var(--ds-border-radius-xs);
+}
