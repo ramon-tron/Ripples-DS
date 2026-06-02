@@ -83,9 +83,15 @@
   padding: var(--ds-spacing-2xs) 0 var(--ds-spacing-2xs) 4px;
 }
 
-/* Mini-specific: tighter gap between trigger children */
+/* Mini-specific: tighter gap, no border, no fill */
 .triggerMini {
   gap: 4px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.triggerMini.triggerDisabled {
+  background-color: transparent;
 }
 
 /* States */
