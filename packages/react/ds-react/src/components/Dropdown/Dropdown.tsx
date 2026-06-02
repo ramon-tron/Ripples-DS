@@ -459,6 +459,7 @@ export function Dropdown({
   const triggerClass = [
     styles.trigger,
     SIZE_CLASS[type][size],
+    isMini ? styles.triggerMini : '',
     isOpen ? styles.triggerOpen : '',
     error ? styles.triggerError : '',
     disabled ? styles.triggerDisabled : '',
@@ -522,7 +523,7 @@ export function Dropdown({
           name={leadingIcon}
           aria-hidden
           style={{
-            fontSize: 20,
+            fontSize: isMini ? 16 : 20,
             flexShrink: 0,
             color: disabled ? 'var(--ds-color-text-disabled)' : 'var(--ds-color-text-tertiary)',
           }}
@@ -645,22 +646,8 @@ export function Dropdown({
       >
         {triggerContent}
 
-        {/* Tags and Search: action divider + search icon button (no chevron) */}
-        {(type === 'search' || type === 'tags') && (
-          <>
-            <div className={styles.actionDivider} aria-hidden="true" />
-            <div
-              className={styles.actionBtn}
-              aria-hidden="true"
-              onClick={e => e.stopPropagation()}
-            >
-              <Icon name="search" aria-hidden style={{ fontSize: 16 }} />
-            </div>
-          </>
-        )}
-
-        {/* Default and Mini: chevron */}
-        {type !== 'search' && type !== 'tags' && (
+        {/* Default + Mini: chevron */}
+        {(type === 'default' || type === 'mini') && (
           <Icon
             name={isOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
             aria-hidden
@@ -671,6 +658,20 @@ export function Dropdown({
               transition: 'transform 150ms ease',
             }}
           />
+        )}
+
+        {/* Search + Tags + Mini: action divider + search icon button */}
+        {type !== 'default' && (
+          <>
+            <div className={styles.actionDivider} aria-hidden="true" />
+            <div
+              className={styles.actionBtn}
+              aria-hidden="true"
+              onClick={e => e.stopPropagation()}
+            >
+              <Icon name="search" aria-hidden style={{ fontSize: 16 }} />
+            </div>
+          </>
         )}
       </div>
 

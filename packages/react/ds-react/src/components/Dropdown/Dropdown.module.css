@@ -76,11 +76,16 @@
 }
 
 .triggerMiniDefault {
-  padding: 6px var(--ds-spacing-m);
+  padding: 6px 0 6px 4px;
 }
 
 .triggerMiniSm {
-  padding: var(--ds-spacing-2xs) var(--ds-spacing-m);
+  padding: var(--ds-spacing-2xs) 0 var(--ds-spacing-2xs) 4px;
+}
+
+/* Mini-specific: tighter gap between trigger children */
+.triggerMini {
+  gap: 4px;
 }
 
 /* States */
