@@ -71,15 +71,17 @@ A composable dropdown (combobox) supporting four interaction modes.
     },
   },
   argTypes: {
-    type:        { control: 'select', options: ['default', 'search', 'tags', 'mini'] },
-    size:        { control: 'select', options: ['default', 'sm'] },
-    label:       { control: 'text' },
-    placeholder: { control: 'text' },
-    helperText:  { control: 'text' },
-    leadingIcon: { control: 'text' },
-    helpIcon:    { control: 'boolean' },
-    error:       { control: 'boolean' },
-    disabled:    { control: 'boolean' },
+    type:            { control: 'select', options: ['default', 'search', 'tags', 'mini'] },
+    size:            { control: 'select', options: ['default', 'sm'] },
+    label:           { control: 'text' },
+    placeholder:     { control: 'text' },
+    helperText:      { control: 'text' },
+    leadingIcon:     { control: 'text' },
+    actionIcon:      { control: 'text' },
+    actionAriaLabel: { control: 'text' },
+    helpIcon:        { control: 'boolean' },
+    error:           { control: 'boolean' },
+    disabled:        { control: 'boolean' },
   },
   args: {
     label: 'Assign to',
@@ -136,6 +138,8 @@ export const Types: Story = {
             value={searchVal}
             onChange={setSearchVal}
             leadingIcon="person_search"
+            actionIcon="search"
+            actionAriaLabel="Search"
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -147,6 +151,8 @@ export const Types: Story = {
             items={PEOPLE}
             values={tags}
             onChangeMulti={setTags}
+            actionIcon="search"
+            actionAriaLabel="Search members"
           />
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -157,6 +163,8 @@ export const Types: Story = {
             items={ROLES}
             value={miniVal}
             onChange={setMiniVal}
+            actionIcon="search"
+            actionAriaLabel="Search"
           />
         </div>
       </div>
@@ -291,6 +299,8 @@ export const SearchDropdown: Story = {
           value={value}
           onChange={setValue}
           leadingIcon="person_search"
+          actionIcon="search"
+          actionAriaLabel="Search"
           helperText={value ? `Selected: ${value}` : 'Start typing to filter members.'}
         />
       </div>
@@ -321,6 +331,8 @@ export const TagsDropdown: Story = {
             items={PEOPLE}
             values={values}
             onChangeMulti={setValues}
+            actionIcon="search"
+            actionAriaLabel="Search members"
             helperText={`${values.length} member${values.length !== 1 ? 's' : ''} selected`}
           />
         </div>
@@ -331,6 +343,8 @@ export const TagsDropdown: Story = {
             label="Add members"
             placeholder="Select people…"
             items={PEOPLE}
+            actionIcon="search"
+            actionAriaLabel="Search members"
           />
         </div>
       </div>
@@ -356,19 +370,19 @@ export const MiniDropdown: Story = {
       <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)', width: 100 }}>Default (36px)</span>
-          <Dropdown type="mini" placeholder="Role" items={ROLES} value={val1} onChange={setVal1} />
+          <Dropdown type="mini" placeholder="Role" items={ROLES} value={val1} onChange={setVal1} actionIcon="search" actionAriaLabel="Search" />
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)', width: 100 }}>Filled</span>
-          <Dropdown type="mini" placeholder="Role" items={ROLES} value={val2} onChange={setVal2} />
+          <Dropdown type="mini" placeholder="Role" items={ROLES} value={val2} onChange={setVal2} actionIcon="search" actionAriaLabel="Search" />
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)', width: 100 }}>Small (32px)</span>
-          <Dropdown type="mini" size="sm" placeholder="Role" items={ROLES} value={val3} onChange={setVal3} />
+          <Dropdown type="mini" size="sm" placeholder="Role" items={ROLES} value={val3} onChange={setVal3} actionIcon="search" actionAriaLabel="Search" />
         </div>
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
           <span style={{ fontSize: 11, fontFamily: 'monospace', color: 'var(--ds-color-text-tertiary)', width: 100 }}>Disabled</span>
-          <Dropdown type="mini" placeholder="Role" items={ROLES} defaultValue="viewer" disabled />
+          <Dropdown type="mini" placeholder="Role" items={ROLES} defaultValue="viewer" disabled actionIcon="search" actionAriaLabel="Search" />
         </div>
       </div>
     );
@@ -440,6 +454,8 @@ export const AllSizes: Story = {
                   placeholder="Select…"
                   items={PEOPLE}
                   defaultValues={type === 'tags' ? ['mina'] : undefined}
+                  actionIcon={type !== 'default' ? 'search' : undefined}
+                  actionAriaLabel={type !== 'default' ? 'Search' : undefined}
                   wrapperStyle={{ width: type === 'mini' ? undefined : 280 }}
                 />
               </div>
@@ -503,6 +519,8 @@ export const InAForm: Story = {
             { value: 'gamma', label: 'Gamma Platform',  icon: 'layers' },
           ]}
           size="sm"
+          actionIcon="search"
+          actionAriaLabel="Search projects"
         />
         <Dropdown
           label="Role"
@@ -522,6 +540,8 @@ export const InAForm: Story = {
           items={PEOPLE}
           values={reviewers}
           onChangeMulti={setReviewers}
+          actionIcon="search"
+          actionAriaLabel="Search reviewers"
           helperText={`${reviewers.length} reviewer${reviewers.length !== 1 ? 's' : ''} added`}
           size="sm"
         />

@@ -11,6 +11,7 @@ import {
 import { Avatar } from '../Avatar/Avatar';
 import { Chip } from '../Chip/Chip';
 import { Icon } from '../Icon/Icon';
+import { IconButton } from '../IconButton/IconButton';
 import styles from './Dropdown.module.css';
 
 // ─── Public types ─────────────────────────────────────────────────────────────
@@ -63,6 +64,11 @@ export interface DropdownProps {
   /** Multi-select default (uncontrolled, tags type) */
   defaultValues?: string[];
   onChangeMulti?: (values: string[]) => void;
+  /** Icon name for the trailing action button (e.g. "search"). When omitted, no action button is shown. */
+  actionIcon?: string;
+  /** Accessible label for the action button */
+  actionAriaLabel?: string;
+  onActionClick?: () => void;
   id?: string;
   wrapperClassName?: string;
   wrapperStyle?: CSSProperties;
@@ -209,6 +215,9 @@ export function Dropdown({
   values: controlledValues,
   defaultValues,
   onChangeMulti,
+  actionIcon,
+  actionAriaLabel,
+  onActionClick,
   id,
   wrapperClassName = '',
   wrapperStyle,
@@ -660,16 +669,20 @@ export function Dropdown({
           />
         )}
 
-        {/* Search + Tags + Mini: action divider + search icon button */}
-        {type !== 'default' && (
+        {/* Optional action button */}
+        {actionIcon && (
           <>
             <div className={styles.actionDivider} aria-hidden="true" />
-            <div
-              className={styles.actionBtn}
-              aria-hidden="true"
-              onClick={e => e.stopPropagation()}
-            >
-              <Icon name="search" aria-hidden style={{ fontSize: 16 }} />
+            <div className={styles.actionBtnWrap}>
+              <IconButton
+                icon={actionIcon}
+                variant="mono-tertiary"
+                size="s"
+                shape="square"
+                disabled={disabled}
+                aria-label={actionAriaLabel ?? actionIcon}
+                onClick={e => { e.stopPropagation(); onActionClick?.(); }}
+              />
             </div>
           </>
         )}

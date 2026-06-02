@@ -237,22 +237,13 @@
   background-color: var(--ds-color-border-subtle);
 }
 
-.actionBtn {
+.actionBtnWrap {
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  padding: var(--ds-spacing-2xs) var(--ds-spacing-l);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--ds-color-text-secondary);
+  padding: 0 12px;
   flex-shrink: 0;
-  transition: background-color 100ms ease;
-}
-
-.actionBtn:hover {
-  background-color: var(--ds-color-fill-neutral);
 }
 
 /* ─── Helper text ─── */
