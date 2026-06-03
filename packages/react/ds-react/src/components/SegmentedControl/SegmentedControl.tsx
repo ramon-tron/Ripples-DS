@@ -89,6 +89,7 @@ export function SegmentedControl({
   const [internalValue, setInternalValue] = useState<string>(defaultValue ?? firstEnabled);
   const currentValue = controlledValue !== undefined ? controlledValue : internalValue;
 
+
   const handleSelect = useCallback(
     (value: string) => {
       setInternalValue(value);
@@ -135,7 +136,7 @@ export function SegmentedControl({
   const iconBtnSize: IconButtonSize = size === 'medium' ? 'm' : 's';
   const iconSize = size === 'medium' ? 20 : 16;
 
-  const rootClass = [
+  const outerClass = [
     styles.root,
     isFramed ? styles.rootFramed : styles.rootFrameless,
     size === 'medium' ? styles.rootMedium : styles.rootSmall,
@@ -148,9 +149,11 @@ export function SegmentedControl({
       role="group"
       aria-label={ariaLabel}
       id={uid}
-      className={rootClass}
+      className={outerClass}
       onKeyDown={handleKeyDown}
     >
+      {/* Block-level grid so 1fr columns have a definite width to divide equally */}
+      <div className={styles.innerGrid}>
       {options.map((option, i) => {
         const isSelected = option.value === currentValue;
         const cornerRadius = getCornerRadius(i, options.length, size, style);
@@ -220,6 +223,7 @@ export function SegmentedControl({
           </div>
         );
       })}
+      </div>
     </div>
   );
 }

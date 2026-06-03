@@ -1,14 +1,31 @@
 /* ─── Root container ─── */
+/*
+ * Outer element is inline-block so the component is inline-level.
+ * Its width = the inner block grid's max-content = N × widest column.
+ * The block-level inner grid then has a definite width, so 1fr columns
+ * resolve to equal shares (= widest column) rather than each column's
+ * own max-content (which is what inline-grid would do).
+ */
 .root {
-  display: inline-flex;
-  align-items: stretch;
+  display: inline-block;
   position: relative;
+}
+
+/* ─── Inner equal-column grid ─── */
+.innerGrid {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  align-items: stretch;
 }
 
 .rootFramed {
   background-color: var(--ds-color-fill-primary);
   border: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+  overflow: hidden;
 }
+
+.rootFrameless {}
 
 .rootMedium {
   border-radius: var(--ds-border-radius-s);
@@ -20,11 +37,10 @@
 
 /* ─── Option slot ─── */
 .option {
-  flex: 1 0 0;
   display: flex;
   align-items: stretch;
-  min-width: 0;
   position: relative;
+  z-index: 1;
 }
 
 /* Left-border separator between options (framed only) */
@@ -73,7 +89,7 @@
 }
 
 .btnSmall {
-  padding: 0 var(--ds-spacing-xs);
+  padding: 0 var(--ds-spacing-s);
   min-height: 24px;
   font-family: var(--ds-button-sm-font-family);
   font-size: var(--ds-button-sm-font-size);

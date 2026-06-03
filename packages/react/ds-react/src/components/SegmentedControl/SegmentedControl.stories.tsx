@@ -11,7 +11,23 @@ const meta = {
     docs: {
       description: {
         component: `
-A hybrid between a button group, radio buttons, and tabs. Use to switch between alternate views of similar or related content.
+A hybrid somewhere between a button group, radio buttons, and tabs; segmented controls are used to switch between different options or views.
+
+---
+
+**When to Use**
+- Use Segmented Control to switch between alternate views of similar or related content.
+- Use the icon-only variant when there is limited space or when the icons are intuitive and easy to understand.
+
+**When to Use Something Else**
+- Use **Tabs** to display different, unrelated content.
+- Use **Hyperlinks** within a paragraph to navigate to another page.
+- Use **Checkboxes** when the user is able to select multiple values from a predefined list of 7 or fewer options.
+- Use **Multi-select Prompts** when the user is able to select multiple values from a predefined list of more than 7 options.
+- Use **Radio** when the user is able to select a single value from a predefined list of 2 to 7 options that will not alter the page content.
+- Use **Single-select Prompts** when the user is able to select a single value from a predefined list of more than 7 options that will not alter the page content.
+
+---
 
 **Types**
 - **Text** — label with optional leading or trailing icon
@@ -54,7 +70,26 @@ type Story = StoryObj<typeof meta>;
 
 // ─── Playground ───────────────────────────────────────────────────────────────
 
-export const Playground: Story = {};
+export const Playground: Story = {
+  argTypes: {
+    iconOnly: {
+      control: 'boolean',
+      description: 'Switch to icon-only variant',
+      table: { category: 'Story' },
+    },
+  },
+  render: (args) => {
+    const { iconOnly, ...rest } = args as typeof args & { iconOnly?: boolean };
+    const options = iconOnly
+      ? [
+          { value: 'list',  icon: 'format_list_bulleted', ariaLabel: 'List' },
+          { value: 'board', icon: 'grid_view',            ariaLabel: 'Board' },
+          { value: 'gantt', icon: 'view_timeline',        ariaLabel: 'Gantt' },
+        ]
+      : rest.options;
+    return <SegmentedControl {...rest} options={options} />;
+  },
+};
 
 // ─── Styles ───────────────────────────────────────────────────────────────────
 
@@ -228,7 +263,7 @@ export const WithIcons: Story = {
 // ─── Many Options ─────────────────────────────────────────────────────────────
 
 export const ManyOptions: Story = {
-  name: 'Many Options (6)',
+  name: 'Many Options (7)',
   parameters: { controls: { disable: true } },
   render: () => {
     const [val, setVal] = useState('mon');
@@ -242,6 +277,7 @@ export const ManyOptions: Story = {
           { value: 'thu', label: 'Thu' },
           { value: 'fri', label: 'Fri' },
           { value: 'sat', label: 'Sat' },
+          { value: 'sun', label: 'Sun' },
         ]}
         value={val}
         onChange={setVal}
