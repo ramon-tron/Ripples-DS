@@ -28,3 +28,5 @@ export { SegmentedControl } from './SegmentedControl/SegmentedControl';
 export type { SegmentedControlProps, SegmentedControlSize, SegmentedControlStyle, SegmentedControlOption } from './SegmentedControl/SegmentedControl';
 export { TextArea } from './TextArea/TextArea';
 export type { TextAreaProps, TextAreaType } from './TextArea/TextArea';
+export { Tabs } from './Tabs/Tabs';
+export type { TabsProps, TabsVariant, TabsSize, TabItem } from './Tabs/Tabs';
