@@ -1,4 +1,4 @@
-import { useCallback, useId, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
+import { useCallback, useId, useLayoutEffect, useRef, useState, type CSSProperties, type KeyboardEvent } from 'react';
 import { Icon } from '../Icon/Icon';
 import styles from './Tabs.module.css';
 
@@ -49,6 +49,8 @@ export function Tabs({
 }: TabsProps) {
   const uid = useId();
   const containerRef = useRef<HTMLDivElement>(null);
+  const indicatorRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const firstEnabled = items.find(i => !i.disabled)?.value ?? items[0]?.value ?? '';
   const [internalValue, setInternalValue] = useState(defaultValue ?? firstEnabled);
@@ -84,6 +86,29 @@ export function Tabs({
     if (val) handleSelect(val);
   }, [handleSelect]);
 
+  // Slide indicator to the selected tab. On first render, snap without animation.
+  useLayoutEffect(() => {
+    const container = containerRef.current;
+    const indicator = indicatorRef.current;
+    if (!container || !indicator) return;
+
+    const selectedBtn = container.querySelector<HTMLElement>('[aria-selected="true"]');
+    if (!selectedBtn) return;
+
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      indicator.style.transition = 'none';
+      indicator.style.transform = `translateX(${selectedBtn.offsetLeft}px)`;
+      indicator.style.width = `${selectedBtn.offsetWidth}px`;
+      void indicator.getBoundingClientRect(); // flush layout so transition:none takes effect
+      indicator.style.transition = '';
+      return;
+    }
+
+    indicator.style.transform = `translateX(${selectedBtn.offsetLeft}px)`;
+    indicator.style.width = `${selectedBtn.offsetWidth}px`;
+  }, [currentValue]);
+
   const isSegmented = variant === 'segmented';
   const iconSize = size === 'medium' ? 20 : 16;
 
@@ -104,6 +129,11 @@ export function Tabs({
       style={style}
       onKeyDown={handleKeyDown}
     >
+      <div
+        ref={indicatorRef}
+        className={isSegmented ? styles.indicatorSegmented : styles.indicatorUnderlined}
+        aria-hidden
+      />
       {items.map((item) => {
         const isSelected = item.value === currentValue;
         const isIconOnly = !item.label;
