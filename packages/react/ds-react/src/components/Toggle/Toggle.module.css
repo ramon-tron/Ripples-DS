@@ -1,0 +1,94 @@
+/* ─── Track (the button itself) ─── */
+.track {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  padding: var(--ds-spacing-3xs);
+  border: none;
+  border-radius: var(--ds-border-radius-pill);
+  cursor: pointer;
+  outline: none;
+  transition: background-color 200ms ease;
+}
+
+.track:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+  outline-offset: 2px;
+}
+
+.track:disabled {
+  cursor: not-allowed;
+}
+
+/* ─── Track sizes ─── */
+.trackDefault {
+  width: 44px;
+  height: 24px;
+}
+
+.trackSm {
+  width: 36px;
+  height: 20px;
+}
+
+/* ─── Track colors ─── */
+.trackOff {
+  background-color: var(--ds-color-fill-neutral);
+}
+
+.trackOff:hover:not(:disabled) {
+  background-color: var(--ds-color-fill-neutral-hover);
+}
+
+.trackOffDisabled {
+  background-color: var(--ds-color-fill-disabled);
+}
+
+.trackOn {
+  background-color: var(--ds-color-fill-success);
+}
+
+.trackOn:hover:not(:disabled) {
+  background-color: var(--ds-color-fill-success-hover);
+}
+
+.trackOnDisabled {
+  background-color: var(--ds-color-fill-success-subtle);
+}
+
+/* ─── Thumb ─── */
+.thumb {
+  position: absolute;
+  top: var(--ds-spacing-3xs);
+  left: var(--ds-spacing-3xs);
+  border-radius: var(--ds-border-radius-circle);
+  background-color: var(--ds-color-fill-primary);
+  box-shadow: var(--ds-shadow-l1);
+  pointer-events: none;
+  /* Spring slide — same feel as the Tabs indicator */
+  transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.thumbDefault {
+  width: 20px;
+  height: 20px;
+}
+
+.thumbSm {
+  width: 16px;
+  height: 16px;
+}
+
+/* Slide thumb to the right when on */
+.thumbOnDefault {
+  transform: translateX(20px); /* 44px track − 20px thumb − 4px padding = 20px */
+}
+
+.thumbOnSm {
+  transform: translateX(16px); /* 36px track − 16px thumb − 4px padding = 16px */
+}
+
+.thumbDisabled {
+  background-color: var(--ds-color-overlay-30);
+}

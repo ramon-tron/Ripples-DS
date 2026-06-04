@@ -30,3 +30,5 @@ export { TextArea } from './TextArea/TextArea';
 export type { TextAreaProps, TextAreaType } from './TextArea/TextArea';
 export { Tabs } from './Tabs/Tabs';
 export type { TabsProps, TabsVariant, TabsSize, TabItem } from './Tabs/Tabs';
+export { Toggle } from './Toggle/Toggle';
+export type { ToggleProps, ToggleSize } from './Toggle/Toggle';
