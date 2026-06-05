@@ -1,0 +1,159 @@
+/* ─── Wrapper ─── */
+/*
+ * drop-shadow traces the combined outline of bubble + arrow as one shape,
+ * so the shadow wraps the whole silhouette instead of leaking between them.
+ * Dark-mode values override via [data-theme="dark"].
+ */
+.wrapper {
+  position: relative;
+  display: inline-block;
+  filter:
+    drop-shadow(0 0 4px rgba(0, 0, 0, 0.08))
+    drop-shadow(0 8px 8px rgba(0, 0, 0, 0.10));
+}
+
+:global([data-theme="dark"]) .wrapper {
+  filter:
+    drop-shadow(0 0 1px rgba(255, 255, 255, 0.07))
+    drop-shadow(0 8px 8px rgba(0, 0, 0, 0.45));
+}
+
+/* ─── Bubble ─── */
+.bubble {
+  position: relative;
+  z-index: 1;
+  background-color: var(--ds-color-fill-inverse);
+  color: var(--ds-color-text-primary-inverse);
+  border-radius: var(--ds-border-radius-m);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-2xs);
+  padding: var(--ds-spacing-s) var(--ds-spacing-m);
+}
+
+/* Simple tooltip — shrinks to content width */
+.bubbleSimple {
+  width: max-content;
+  max-width: 240px;
+}
+
+/* Full tooltip — fixed width to hold body text */
+.bubbleFull {
+  width: 320px;
+}
+
+/* ─── Content row (icon + text column) ─── */
+.contentRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-spacing-2xs);
+  width: 100%;
+}
+
+.headerIcon {
+  flex-shrink: 0;
+}
+
+/* ─── Text column (title row + body) ─── */
+.textCol {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-2xs);
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Title row (title + close button) ─── */
+.titleRow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* ─── Title ─── */
+.title {
+  flex: 1;
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+}
+
+.titleDefault { color: var(--ds-color-text-primary-inverse); }
+.titleBrand   { color: var(--ds-color-text-brand); }
+.titleAlert   { color: var(--ds-color-text-alert); }
+.titleError   { color: var(--ds-color-text-error); }
+.titleSuccess { color: var(--ds-color-text-success); }
+
+
+/* ─── Supporting text ─── */
+.content {
+  margin: 0;
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+  color: var(--ds-color-text-secondary-inverse);
+}
+
+
+/* ─── Arrow ─── */
+/*
+ * clip-path: path() lets us draw a triangle with a proper 2px bezier-rounded
+ * tip — something neither clip-path polygon nor border-radius on a rotated
+ * square can do cleanly. The base of each triangle overlaps the bubble by
+ * 1px so filter: drop-shadow traces a seamless combined outline.
+ *
+ * Math: tip radius r=2px. For each direction the two points approaching the
+ * tip are offset 2px (≈1.414px per axis at 45°) along the side edges, with
+ * a quadratic bezier through the tip as control point.
+ */
+.arrow {
+  position: absolute;
+  z-index: 0;
+  background-color: var(--ds-color-fill-inverse);
+}
+
+/* Bottom — 14×7, tip points down, base overlaps bubble by 1px */
+.arrow-bottom-left,
+.arrow-bottom-center,
+.arrow-bottom-right {
+  width: 14px;
+  height: 7px;
+  clip-path: path('M 0 0 L 14 0 L 8.414 5.586 Q 7 7 5.586 5.586 Z');
+  bottom: -6px;
+}
+.arrow-bottom-left   { left: var(--ds-spacing-m); }
+.arrow-bottom-center { left: calc(50% - 7px); }
+.arrow-bottom-right  { right: var(--ds-spacing-m); }
+
+/* Top — 14×7, tip points up */
+.arrow-top-left,
+.arrow-top-center,
+.arrow-top-right {
+  width: 14px;
+  height: 7px;
+  clip-path: path('M 0 7 L 14 7 L 8.414 1.414 Q 7 0 5.586 1.414 Z');
+  top: -6px;
+}
+.arrow-top-left   { left: var(--ds-spacing-m); }
+.arrow-top-center { left: calc(50% - 7px); }
+.arrow-top-right  { right: var(--ds-spacing-m); }
+
+/* Left — 7×14, tip points left */
+.arrow-left {
+  width: 7px;
+  height: 14px;
+  clip-path: path('M 7 0 L 7 14 L 1.414 8.414 Q 0 7 1.414 5.586 Z');
+  left: -6px;
+  top: calc(50% - 7px);
+}
+
+/* Right — 7×14, tip points right */
+.arrow-right {
+  width: 7px;
+  height: 14px;
+  clip-path: path('M 0 0 L 0 14 L 5.586 8.414 Q 7 7 5.586 5.586 Z');
+  right: -6px;
+  top: calc(50% - 7px);
+}

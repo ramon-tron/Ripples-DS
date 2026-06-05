@@ -32,3 +32,5 @@ export { Tabs } from './Tabs/Tabs';
 export type { TabsProps, TabsVariant, TabsSize, TabItem } from './Tabs/Tabs';
 export { Toggle } from './Toggle/Toggle';
 export type { ToggleProps, ToggleSize } from './Toggle/Toggle';
+export { Tooltip } from './Tooltip/Tooltip';
+export type { TooltipProps, TooltipArrow, TooltipTitleColor } from './Tooltip/Tooltip';
