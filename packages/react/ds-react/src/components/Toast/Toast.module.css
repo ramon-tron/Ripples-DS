@@ -1,0 +1,163 @@
+/* ─── Portal container ─── */
+.portal {
+  position: fixed;
+  bottom: var(--ds-spacing-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* ─── Animated wrapper ─── */
+.toastWrapper {
+  pointer-events: auto;
+  animation: toastIn 320ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.exiting {
+  animation: toastOut 220ms ease forwards;
+}
+
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes toastOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+/*
+ * Theme-sensitive custom properties are defined at the [data-theme] / :root
+ * level so they cascade through the DOM via CSS custom property inheritance.
+ * This means a [data-theme="light"] container inside a dark page correctly
+ * resets to light values — the nearest [data-theme] ancestor wins.
+ *
+ * DS tokens (--ds-color-*) are also re-asserted on [data-theme="light"] because
+ * the token system only has :root + [data-theme="dark"] rules; without this,
+ * a [data-theme="light"] container would inherit the dark page's token values.
+ */
+:global(:root) {
+  --_toast-gradient-end:       rgba(0, 0, 0, 0.27);
+  --_toast-icon-bg:            rgba(0, 0, 0, 0.10);
+  --_toast-tint-success:       rgba(3,   191, 111, 0.30);
+  --_toast-tint-destructive:   rgba(255,   0,  82, 0.30);
+  --_toast-tint-informational: rgba(0,   124, 255, 0.30);
+  --_toast-tint-alert:         rgba(232, 186,   0, 0.30);
+}
+
+:global([data-theme="dark"]) {
+  --_toast-gradient-end:       rgba(255, 255, 255, 0.27);
+  --_toast-icon-bg:            rgba(255, 255, 255, 0.10);
+  --_toast-tint-success:       rgba(53,  204, 140, 0.30);
+  --_toast-tint-destructive:   rgba(255,  51, 117, 0.30);
+  --_toast-tint-informational: rgba(51,  150, 255, 0.30);
+  --_toast-tint-alert:         rgba(255, 214,  51, 0.30);
+}
+
+:global([data-theme="light"]) {
+  --_toast-gradient-end:       rgba(0, 0, 0, 0.27);
+  --_toast-icon-bg:            rgba(0, 0, 0, 0.10);
+  --_toast-tint-success:       rgba(3,   191, 111, 0.30);
+  --_toast-tint-destructive:   rgba(255,   0,  82, 0.30);
+  --_toast-tint-informational: rgba(0,   124, 255, 0.30);
+  --_toast-tint-alert:         rgba(232, 186,   0, 0.30);
+  /* Re-assert DS tokens that dark mode overwrites */
+  --ds-color-fill-inverse:          #242424;
+  --ds-color-text-primary-inverse:  #fcfcfc;
+  --ds-color-text-tertiary:         #a1a1a1;
+}
+
+/* ─── Toast bubble ─── */
+.toast {
+  /* Default (no type): flat overlay — type classes override this */
+  --_type-color: var(--_toast-gradient-end);
+
+  background:
+    linear-gradient(90deg, var(--_type-color) 0%, var(--_toast-gradient-end) 100%),
+    var(--ds-color-fill-inverse);
+
+  color: var(--ds-color-text-primary-inverse);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ds-spacing-2xl);
+  padding: var(--ds-spacing-s) var(--ds-spacing-m);
+  border-radius: var(--ds-border-radius-s);
+  width: 340px;
+
+  filter:
+    drop-shadow(0 0 3px rgba(0, 0, 0, 0.08))
+    drop-shadow(0 10px 8px rgba(0, 0, 0, 0.10));
+}
+
+/* Default variant is narrower (no icon, less content) */
+.toastDefault {
+  width: 300px;
+}
+
+/* ─── Type gradient tints + icon colors ─── */
+.typeSuccess       { --_type-color: var(--_toast-tint-success);       --_icon-color: var(--ds-color-fill-success); }
+.typeDestructive   { --_type-color: var(--_toast-tint-destructive);   --_icon-color: var(--ds-color-fill-error); }
+.typeInformational { --_type-color: var(--_toast-tint-informational); --_icon-color: var(--ds-color-fill-info); }
+.typeAlert         { --_type-color: var(--_toast-tint-alert);         --_icon-color: var(--ds-color-fill-alert); }
+
+/* ─── Left content group ─── */
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Icon circle ─── */
+.iconWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-3xs);
+  border-radius: var(--ds-border-radius-circle);
+  background-color: var(--_toast-icon-bg);
+  color: var(--_icon-color, var(--ds-color-text-primary-inverse));
+  flex-shrink: 0;
+}
+
+/* ─── Text ─── */
+.textCol {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--ds-body-s-bold-font-family);
+  font-size: var(--ds-body-s-bold-font-size);
+  font-weight: var(--ds-body-s-bold-font-weight);
+  line-height: var(--ds-body-s-bold-line-height);
+}
+
+.description {
+  margin: 0;
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+  color: var(--ds-color-text-tertiary);
+}

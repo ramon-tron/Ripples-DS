@@ -34,3 +34,5 @@ export { Toggle } from './Toggle/Toggle';
 export type { ToggleProps, ToggleSize } from './Toggle/Toggle';
 export { Tooltip } from './Tooltip/Tooltip';
 export type { TooltipProps, TooltipArrow, TooltipTitleColor } from './Tooltip/Tooltip';
+export { Toast, ToastProvider, useToast } from './Toast/Toast';
+export type { ToastProps, ToastType } from './Toast/Toast';
