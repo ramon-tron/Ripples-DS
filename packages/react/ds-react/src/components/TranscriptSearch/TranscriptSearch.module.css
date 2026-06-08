@@ -1,0 +1,136 @@
+/*
+ * Re-assert light-mode DS tokens used by this component so a
+ * [data-theme="light"] container inside a dark page works correctly.
+ */
+:global([data-theme="light"]) {
+  --ds-color-surface-l1:         #ffffff;
+  --ds-color-fill-primary:       #ffffff;
+  --ds-color-fill-subtle:        #fafafa;
+  --ds-color-text-primary:       #242424;
+  --ds-color-text-secondary:     #767676;
+  --ds-color-text-placeholder:   #a1a1a1;
+  --ds-color-icon-subtle:        #7f7f7f;
+  --ds-color-border-subtle:      #d1d1d1;
+  --ds-color-border-more-subtle: #e6e6e6;
+}
+
+/* ─── Root ─── */
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--ds-spacing-2xs);
+  width: 100%;
+}
+
+/* ─── Status label ("1 of 9" / "Not found") ─── */
+.statusLabel {
+  margin: 0;
+  font-family: var(--ds-body-s-regular-font-family);
+  font-size: var(--ds-body-s-regular-font-size);
+  font-weight: var(--ds-body-s-regular-font-weight);
+  line-height: var(--ds-body-s-regular-line-height);
+  letter-spacing: var(--ds-body-s-regular-letter-spacing);
+  color: var(--ds-color-text-secondary);
+  white-space: nowrap;
+}
+
+/* ─── Search row ─── */
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  width: 100%;
+}
+
+/* ─── Input container ─── */
+.inputContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  flex: 1;
+  min-width: 0;
+  padding: var(--ds-spacing-xs) 14px;
+  background-color: var(--ds-color-fill-primary);
+  border: 1px solid var(--ds-color-border-more-subtle);
+  border-radius: var(--ds-border-radius-s);
+}
+
+.searchIcon {
+  display: flex;
+  align-items: center;
+  color: var(--ds-color-icon-subtle);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 0;
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+}
+
+.input::placeholder {
+  color: var(--ds-color-text-placeholder);
+}
+
+/* ─── Clear button ─── */
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-2xs);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ds-color-icon-subtle);
+  border-radius: var(--ds-border-radius-s);
+  flex-shrink: 0;
+}
+
+.clearButton:hover {
+  background-color: var(--ds-color-fill-subtle);
+}
+
+/* ─── Prev / Next navigation ─── */
+.navContainer {
+  display: flex;
+  align-items: stretch;
+  height: 36px;
+  width: 80px;
+  flex-shrink: 0;
+  background-color: var(--ds-color-fill-primary);
+  border: 1px solid var(--ds-color-border-more-subtle);
+  border-radius: var(--ds-border-radius-s);
+  overflow: hidden;
+}
+
+.navBtn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-xs);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--ds-color-icon-subtle);
+}
+
+.navBtn:hover {
+  background-color: var(--ds-color-fill-subtle);
+}
+
+.navDivider {
+  width: 1px;
+  background-color: var(--ds-color-border-more-subtle);
+  flex-shrink: 0;
+}

@@ -98,20 +98,18 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: var(--ds-spacing-2xl);
+  gap: var(--ds-spacing-l);
   padding: var(--ds-spacing-s) var(--ds-spacing-m);
   border-radius: var(--ds-border-radius-s);
-  width: 340px;
+  width: fit-content;
+  min-width: 100px;
+  max-width: 400px;
 
   filter:
     drop-shadow(0 0 3px rgba(0, 0, 0, 0.08))
     drop-shadow(0 10px 8px rgba(0, 0, 0, 0.10));
 }
 
-/* Default variant is narrower (no icon, less content) */
-.toastDefault {
-  width: 300px;
-}
 
 /* ─── Type gradient tints + icon colors ─── */
 .typeSuccess       { --_type-color: var(--_toast-tint-success);       --_icon-color: var(--ds-color-fill-success); }

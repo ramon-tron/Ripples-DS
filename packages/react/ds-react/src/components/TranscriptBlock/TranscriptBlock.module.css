@@ -1,0 +1,70 @@
+/*
+ * Re-assert light-mode DS tokens so a [data-theme="light"] container inside
+ * a dark page correctly overrides the inherited dark values. The token system
+ * only has :root + [data-theme="dark"] rules, so this is required for
+ * nested theme switching to work.
+ */
+:global([data-theme="light"]) {
+  --ds-color-surface-l0:            #ffffff;
+  --ds-color-surface-l1:            #ffffff;
+  --ds-color-fill-subtle:           #fafafa;
+  --ds-color-text-primary:          #242424;
+  --ds-color-border-subtle:         #d1d1d1;
+  --ds-color-fill-avatar1-subtle:   #c8c7ff;
+  --ds-color-fill-avatar2-subtle:   #b0d6ff;
+  --ds-color-fill-avatar3-subtle:   #b1ebd2;
+  --ds-color-fill-avatar4-subtle:   #ffcab0;
+  --ds-color-fill-avatar5-subtle:   #ffefb0;
+  --ds-color-text-avatar1-subtle:   #2a298c;
+  --ds-color-text-avatar2-subtle:   #0058b5;
+  --ds-color-text-avatar3-subtle:   #02693d;
+  --ds-color-text-avatar4-subtle:   #8c2e00;
+  --ds-color-text-avatar5-subtle:   #6b5600;
+  --ds-color-border-alert:          #e8ba00;
+}
+
+.block {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-spacing-m);
+  padding: var(--ds-spacing-m);
+  background-color: var(--ds-color-fill-subtle);
+  border-radius: var(--ds-border-radius-m);
+  width: fit-content;
+  max-width: 100%;
+}
+
+.content {
+  min-width: 0;
+}
+
+.text {
+  margin: 0;
+  font-family: var(--ds-body-m-regular-font-family);
+  font-size: var(--ds-body-m-regular-font-size);
+  font-weight: var(--ds-body-m-regular-font-weight);
+  line-height: var(--ds-body-m-regular-line-height);
+  letter-spacing: var(--ds-body-m-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+}
+
+/*
+ * Inline highlight span. With the default box-decoration-break: slice,
+ * border-left appears only at the start of the highlight and border-right
+ * only at the end — matching the Figma bracket design — while the background
+ * fills every wrapped line.
+ */
+.highlight {
+  background-color: var(--ds-color-fill-avatar5-subtle);
+  border-left: 2px solid var(--ds-color-border-alert);
+  border-right: 2px solid var(--ds-color-border-alert);
+  color: inherit;
+}
+
+/* Follow-along: vivid yellow pill marks the current playback word/phrase. */
+.followAlongHighlight {
+  background-color: var(--ds-color-fill-avatar5);
+  border-radius: var(--ds-border-radius-xs);
+  padding: 0 var(--ds-spacing-2xs);
+  color: inherit;
+}
