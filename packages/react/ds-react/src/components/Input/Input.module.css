@@ -41,6 +41,20 @@
   color: var(--ds-color-text-disabled);
 }
 
+.helpTooltipWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.helpTooltip {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  white-space: nowrap;
+}
+
 /* ─── Input container ─── */
 .container {
   display: flex;

@@ -46,12 +46,25 @@
   color: var(--ds-color-text-disabled);
 }
 
+.helpTooltipWrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.helpTooltip {
+  position: absolute;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+  white-space: nowrap;
+}
+
 /* ─── Trigger ─── */
 .trigger {
   position: relative;
   display: flex;
-  align-items: center;
-  gap: var(--ds-spacing-s);
+  align-items: stretch;
   width: 100%;
   box-sizing: border-box;
   background-color: var(--ds-color-fill-primary);
@@ -66,7 +79,16 @@
   user-select: none;
 }
 
-/* Size variants */
+/* ─── Trigger inner wrapper (holds content + chevron; action button sits outside) ─── */
+.triggerInner {
+  display: flex;
+  align-items: center;
+  flex: 1 0 0;
+  min-width: 0;
+  gap: var(--ds-spacing-s);
+}
+
+/* Size variants — applied to triggerInner */
 .triggerDefault {
   padding: var(--ds-spacing-m) 14px;
 }
@@ -83,11 +105,14 @@
   padding: var(--ds-spacing-2xs) 0 var(--ds-spacing-2xs) 4px;
 }
 
-/* Mini-specific: tighter gap, no border, no fill */
+/* Mini-specific: no border, no fill */
 .triggerMini {
-  gap: 4px;
   background-color: transparent;
   border-color: transparent;
+}
+
+.triggerInnerMini {
+  gap: 4px;
 }
 
 .triggerMini.triggerDisabled {
@@ -115,8 +140,16 @@
 
 .triggerDisabled {
   background-color: var(--ds-color-fill-disabled);
+  color: var(--ds-color-text-disabled);
   cursor: not-allowed;
   border-color: var(--ds-color-border-more-subtle);
+}
+
+.triggerDisabled .triggerText,
+.triggerDisabled .triggerPlaceholder,
+.triggerDisabled .searchInput,
+.triggerDisabled .tagsInput {
+  color: var(--ds-color-text-disabled);
 }
 
 /* ─── Tags trigger inner layout ─── */
@@ -135,10 +168,16 @@
   gap: var(--ds-spacing-2xs);
   flex: 1 0 0;
   min-width: 0;
-  overflow: hidden;
-  /* Feather fade on right edge so overflowing chips gracefully clip */
-  -webkit-mask-image: linear-gradient(to right, black 70%, transparent 100%);
-  mask-image: linear-gradient(to right, black 70%, transparent 100%);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chipsRow::-webkit-scrollbar {
+  display: none;
+}
+
+.chipsRowOpen {
+  flex-wrap: nowrap;
 }
 
 .clearAllBtn {
@@ -237,13 +276,29 @@
   background-color: var(--ds-color-border-subtle);
 }
 
-.actionBtnWrap {
+.actionBtn {
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: stretch;
-  padding: 0 12px;
+  padding: var(--ds-spacing-2xs) var(--ds-spacing-l);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--ds-color-text-secondary);
+  border-radius: 0 var(--ds-border-radius-s) var(--ds-border-radius-s) 0;
+  transition: background-color 100ms ease;
   flex-shrink: 0;
+}
+
+.actionBtn:hover:not(:disabled) {
+  background-color: var(--ds-color-fill-neutral);
+}
+
+.actionBtn:disabled {
+  background-color: var(--ds-color-fill-disabled);
+  color: var(--ds-color-text-disabled);
+  cursor: not-allowed;
 }
 
 /* ─── Helper text ─── */
@@ -258,6 +313,10 @@
 
 .helperTextError {
   color: var(--ds-color-text-error);
+}
+
+.helperTextDisabled {
+  color: var(--ds-color-text-disabled);
 }
 
 /* ─── Dropdown menu (portal) ─── */

@@ -12,6 +12,7 @@ import { Avatar } from '../Avatar/Avatar';
 import { Chip } from '../Chip/Chip';
 import { Icon } from '../Icon/Icon';
 import { IconButton } from '../IconButton/IconButton';
+import { Tooltip } from '../Tooltip/Tooltip';
 import styles from './Dropdown.module.css';
 
 // ─── Public types ─────────────────────────────────────────────────────────────
@@ -48,6 +49,7 @@ export interface DropdownProps {
   size?: DropdownSize;
   label?: string;
   helpIcon?: boolean;
+  helpIconTooltip?: string;
   helperText?: string;
   placeholder?: string;
   error?: boolean;
@@ -203,6 +205,7 @@ export function Dropdown({
   size = 'default',
   label,
   helpIcon = false,
+  helpIconTooltip,
   helperText,
   placeholder = 'Select an option',
   error = false,
@@ -223,7 +226,7 @@ export function Dropdown({
   wrapperStyle,
 }: DropdownProps) {
   const isMulti = type === 'tags';
-  const isSearchable = type === 'search';
+  const isSearchable = type === 'search' || type === 'default';
   const isMini = type === 'mini';
 
   const uid = useId();
@@ -243,17 +246,34 @@ export function Dropdown({
   const [isOpen, setIsOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [menuStyle, setMenuStyle] = useState<CSSProperties>({});
+  const [portalTheme, setPortalTheme] = useState<string | undefined>(undefined);
+  const [helpTooltipOpen, setHelpTooltipOpen] = useState(false);
 
   // ── Refs ──
   const triggerRef = useRef<HTMLDivElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const helpIconRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!helpTooltipOpen) return;
+    const onMouseDown = (e: MouseEvent) => {
+      if (!helpIconRef.current?.contains(e.target as Node)) setHelpTooltipOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') setHelpTooltipOpen(false); };
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [helpTooltipOpen]);
 
   // ── Derived ──
   const allOptions = items.filter(isOption);
   const selectedOption = allOptions.find(o => o.value === currentValue) ?? null;
   const selectedOptions = allOptions.filter(o => currentValues.includes(o.value));
-  const displayItems = isSearchable ? filterItems(items, searchQuery) : items;
+  const displayItems = (isSearchable || isMulti) ? filterItems(items, searchQuery) : items;
   const navigableItems = displayItems.filter(i => isOption(i) && !i.disabled) as DropdownOptionItem[];
 
   // ── Position ──
@@ -278,6 +298,8 @@ export function Dropdown({
   const openMenu = useCallback(() => {
     if (disabled) return;
     updateMenuPosition();
+    const themeEl = triggerRef.current?.closest('[data-theme]') as HTMLElement | null;
+    setPortalTheme(themeEl?.dataset.theme);
     setIsOpen(true);
   }, [disabled, updateMenuPosition]);
 
@@ -290,8 +312,10 @@ export function Dropdown({
   // ── Focus first item on open ──
   useEffect(() => {
     if (!isOpen) return;
-    if (isSearchable) {
-      searchInputRef.current?.focus();
+    if (isSearchable || isMulti) {
+      requestAnimationFrame(() => {
+        searchInputRef.current?.focus();
+      });
     } else {
       requestAnimationFrame(() => {
         menuRef.current
@@ -299,7 +323,7 @@ export function Dropdown({
           ?.focus();
       });
     }
-  }, [isOpen, isSearchable]);
+  }, [isOpen, isSearchable, isMulti]);
 
   // ── Reposition on scroll / resize ──
   useEffect(() => {
@@ -338,6 +362,8 @@ export function Dropdown({
           : [...currentValues, value];
         setInternalValues(next);
         onChangeMulti?.(next);
+        setSearchQuery('');
+        requestAnimationFrame(() => searchInputRef.current?.focus());
       } else {
         const next = currentValue === value ? null : value;
         setInternalValue(next ?? null);
@@ -361,6 +387,11 @@ export function Dropdown({
   const handleTriggerKeyDown = useCallback(
     (e: KeyboardEvent<HTMLDivElement>) => {
       if (disabled) return;
+      // Let the tags search input handle its own keystrokes; only intercept navigation/dismiss keys.
+      if (
+        (e.target as HTMLElement).tagName === 'INPUT' &&
+        e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'Escape'
+      ) return;
       if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
         e.preventDefault();
         if (!isOpen) {
@@ -445,12 +476,24 @@ export function Dropdown({
         </label>
       )}
       {!isMini && helpIcon && (
-        <span
-          className={[styles.helpIconWrap, disabled ? styles.helpIconWrapDisabled : ''].filter(Boolean).join(' ')}
-          aria-hidden="true"
-        >
-          <Icon name="help" style={{ fontSize: 12 }} />
-        </span>
+        <div ref={helpIconRef} className={styles.helpTooltipWrap}>
+          <IconButton
+            icon="help"
+            iconFill={0}
+            variant="mono-tertiary"
+            size="2xs"
+            shape="circular"
+            disabled={disabled}
+            aria-label="Help"
+            {...(helpIconTooltip
+              ? { 'aria-expanded': helpTooltipOpen, onClick: () => setHelpTooltipOpen(v => !v) }
+              : { tabIndex: -1, 'aria-hidden': true }
+            )}
+          />
+          {helpIconTooltip && helpTooltipOpen && (
+            <Tooltip title={helpIconTooltip} arrow="left" className={styles.helpTooltip} />
+          )}
+        </div>
       )}
     </div>
   );
@@ -458,7 +501,7 @@ export function Dropdown({
   const helperTextEl = !isMini && helperText && (
     <span
       id={helperId}
-      className={[styles.helperText, error ? styles.helperTextError : ''].filter(Boolean).join(' ')}
+      className={[styles.helperText, error ? styles.helperTextError : '', disabled ? styles.helperTextDisabled : ''].filter(Boolean).join(' ')}
       role={error ? 'alert' : undefined}
     >
       {helperText}
@@ -467,11 +510,16 @@ export function Dropdown({
 
   const triggerClass = [
     styles.trigger,
-    SIZE_CLASS[type][size],
     isMini ? styles.triggerMini : '',
     isOpen ? styles.triggerOpen : '',
     error ? styles.triggerError : '',
     disabled ? styles.triggerDisabled : '',
+  ].filter(Boolean).join(' ');
+
+  const triggerInnerClass = [
+    styles.triggerInner,
+    SIZE_CLASS[type][size],
+    isMini ? styles.triggerInnerMini : '',
   ].filter(Boolean).join(' ');
 
   const handleClearAll = useCallback(
@@ -485,7 +533,7 @@ export function Dropdown({
 
   // Trigger content (text area)
   const triggerContent = isMulti ? (
-    // Tags trigger: search icon + chips row (clips with feather) + clear-all ×
+    // Tags trigger: search icon + chips row (wraps when open) + clear-all ×
     <div className={styles.tagsContent}>
       <Icon
         name="search"
@@ -496,20 +544,37 @@ export function Dropdown({
           color: disabled ? 'var(--ds-color-text-disabled)' : 'var(--ds-color-text-tertiary)',
         }}
       />
-      <div className={styles.chipsRow}>
-        {selectedOptions.length === 0 ? (
-          <span className={styles.triggerPlaceholder}>{placeholder}</span>
-        ) : (
-          selectedOptions.map(opt => (
-            <Chip
-              key={opt.value}
-              size="sm"
-              onDismiss={disabled ? undefined : (e) => { e?.stopPropagation(); handleRemoveTag(opt.value); }}
-            >
-              {opt.label}
-            </Chip>
-          ))
-        )}
+      <div
+        className={[
+          styles.chipsRow,
+          selectedOptions.length > 0 ? styles.chipsRowFilled : '',
+          isOpen ? styles.chipsRowOpen : '',
+        ].filter(Boolean).join(' ')}
+      >
+        {selectedOptions.map(opt => (
+          <Chip
+            key={opt.value}
+            size="sm"
+            onDismiss={disabled ? undefined : (e) => { e?.stopPropagation(); handleRemoveTag(opt.value); }}
+          >
+            {opt.label}
+          </Chip>
+        ))}
+        <input
+          ref={searchInputRef}
+          type="text"
+          className={styles.tagsInput}
+          value={isOpen ? searchQuery : ''}
+          readOnly={!isOpen}
+          onChange={isOpen ? (e => setSearchQuery(e.target.value)) : undefined}
+          placeholder={selectedOptions.length === 0 ? placeholder : ''}
+          disabled={disabled}
+          tabIndex={-1}
+          aria-autocomplete="list"
+          aria-controls={listboxId}
+          onClick={isOpen ? (e => e.stopPropagation()) : undefined}
+          style={!isOpen && selectedOptions.length > 0 ? { width: 0, minWidth: 0 } : undefined}
+        />
       </div>
       {selectedOptions.length > 0 && (
         <button
@@ -618,6 +683,7 @@ export function Dropdown({
       className={styles.menu}
       style={menuStyle}
       onKeyDown={handleMenuKeyDown}
+      {...(portalTheme ? { 'data-theme': portalTheme } : {})}
     >
       <div className={styles.menuInner}>
         {menuContent}
@@ -653,37 +719,37 @@ export function Dropdown({
         onClick={!disabled ? () => (isOpen ? closeMenu() : openMenu()) : undefined}
         onKeyDown={handleTriggerKeyDown}
       >
-        {triggerContent}
+        <div className={triggerInnerClass}>
+          {triggerContent}
 
-        {/* Default + Mini: chevron */}
-        {(type === 'default' || type === 'mini') && (
-          <Icon
-            name={isOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
-            aria-hidden
-            style={{
-              fontSize: 24,
-              flexShrink: 0,
-              color: disabled ? 'var(--ds-color-text-disabled)' : 'var(--ds-color-text-tertiary)',
-              transition: 'transform 150ms ease',
-            }}
-          />
-        )}
+          {/* Default + Mini: chevron */}
+          {(type === 'default' || type === 'mini') && (
+            <Icon
+              name={isOpen ? 'keyboard_arrow_up' : 'keyboard_arrow_down'}
+              aria-hidden
+              style={{
+                fontSize: 24,
+                flexShrink: 0,
+                color: disabled ? 'var(--ds-color-text-disabled)' : 'var(--ds-color-text-tertiary)',
+                transition: 'transform 150ms ease',
+              }}
+            />
+          )}
+        </div>
 
         {/* Optional action button */}
         {actionIcon && (
           <>
             <div className={styles.actionDivider} aria-hidden="true" />
-            <div className={styles.actionBtnWrap}>
-              <IconButton
-                icon={actionIcon}
-                variant="mono-tertiary"
-                size="s"
-                shape="square"
-                disabled={disabled}
-                aria-label={actionAriaLabel ?? actionIcon}
-                onClick={e => { e.stopPropagation(); onActionClick?.(); }}
-              />
-            </div>
+            <button
+              type="button"
+              className={styles.actionBtn}
+              onClick={e => { e.stopPropagation(); onActionClick?.(); }}
+              disabled={disabled}
+              aria-label={actionAriaLabel ?? actionIcon}
+            >
+              <Icon name={actionIcon} size="xs" aria-hidden />
+            </button>
           </>
         )}
       </div>

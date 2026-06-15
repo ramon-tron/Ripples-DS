@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties, InputHTMLAttributes } from 'react';
 import { Icon } from '../Icon/Icon';
 import { IconButton } from '../IconButton/IconButton';
+import { Tooltip } from '../Tooltip/Tooltip';
 import styles from './Input.module.css';
 
 export type InputSize = 'default' | 'sm';
@@ -9,6 +10,7 @@ export type InputSize = 'default' | 'sm';
 export interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   label?: string;
   helpIcon?: boolean;
+  helpIconTooltip?: string;
   helperText?: string;
   error?: boolean;
   size?: InputSize;
@@ -29,6 +31,7 @@ const CONTENT_PADDING: Record<InputSize, string> = {
 export function Input({
   label,
   helpIcon = false,
+  helpIconTooltip,
   helperText,
   error = false,
   size = 'default',
@@ -49,7 +52,23 @@ export function Input({
   ...htmlProps
 }: InputProps) {
   const [showPassword, setShowPassword] = useState(false);
+  const [helpTooltipOpen, setHelpTooltipOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const helpIconRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!helpTooltipOpen) return;
+    const onMouseDown = (e: MouseEvent) => {
+      if (!helpIconRef.current?.contains(e.target as Node)) setHelpTooltipOpen(false);
+    };
+    const onKeyDown = (e: KeyboardEvent) => { if (e.key === 'Escape') setHelpTooltipOpen(false); };
+    document.addEventListener('mousedown', onMouseDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', onMouseDown);
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [helpTooltipOpen]);
 
   const [numDisplay, setNumDisplay] = useState<string>(() => {
     const v = controlledValue ?? defaultValue;
@@ -121,12 +140,24 @@ export function Input({
         {label}
       </label>
       {helpIcon && (
-        <span
-          className={[styles.helpIconWrap, disabled ? styles.helpIconWrapDisabled : ''].filter(Boolean).join(' ')}
-          aria-hidden="true"
-        >
-          <Icon name="help" size="xs" style={{ fontSize: 12 }} />
-        </span>
+        <div ref={helpIconRef} className={styles.helpTooltipWrap}>
+          <IconButton
+            icon="help"
+            iconFill={0}
+            variant="mono-tertiary"
+            size="2xs"
+            shape="circular"
+            disabled={disabled}
+            aria-label="Help"
+            {...(helpIconTooltip
+              ? { 'aria-expanded': helpTooltipOpen, onClick: () => setHelpTooltipOpen(v => !v) }
+              : { tabIndex: -1, 'aria-hidden': true }
+            )}
+          />
+          {helpIconTooltip && helpTooltipOpen && (
+            <Tooltip title={helpIconTooltip} arrow="left" className={styles.helpTooltip} />
+          )}
+        </div>
       )}
     </div>
   );

@@ -8,16 +8,24 @@ import '../src/index.css';
 
 const withTheme: Decorator = (Story, context) => {
   const theme = (context.globals.theme as string) ?? 'light';
-  const fullscreen = context.parameters.layout === 'fullscreen';
+  const layout = context.parameters.layout as string | undefined;
+  const fullscreen = layout === 'fullscreen';
+  const centered = layout === 'centered';
   return React.createElement(
     'div',
     {
       'data-theme': theme,
       style: {
+        width: '100%',
         padding: fullscreen ? 0 : '1.5rem',
         minHeight: fullscreen ? '100vh' : undefined,
         boxSizing: 'border-box',
         background: theme === 'dark' ? '#1c1c1c' : '#ffffff',
+        ...(centered && {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }),
       },
     },
     React.createElement(Story)

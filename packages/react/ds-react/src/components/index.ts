@@ -42,3 +42,5 @@ export { Tooltip } from './Tooltip/Tooltip';
 export type { TooltipProps, TooltipArrow, TooltipTitleColor } from './Tooltip/Tooltip';
 export { Toast, ToastProvider, useToast, useOptionalToast } from './Toast/Toast';
 export type { ToastProps, ToastType } from './Toast/Toast';
+export { Pagination } from './Pagination/Pagination';
+export type { PaginationProps, PaginationSize } from './Pagination/Pagination';
