@@ -1,0 +1,242 @@
+/* ─── Shared ─── */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+}
+
+/* ─── Compact — outer layout ─── */
+.compact {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+}
+
+/* ─── Compact — indicator strip (pill container) ─── */
+.strip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+  background-color: var(--ds-color-fill-neutral);
+  border-radius: var(--ds-border-radius-pill);
+  flex-shrink: 0;
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.stripDefault {
+  padding: var(--ds-spacing-s) var(--ds-spacing-l);
+  /* Height lands at 8px indicators + 2 × 8px padding = 24px */
+}
+
+.stripLarge {
+  padding: var(--ds-spacing-s) var(--ds-spacing-l);
+  /* Height lands at 16px indicators + 2 × 8px padding = 32px */
+}
+
+/* ─── Compact — indicator button wrapper ─── */
+.indicatorBtn {
+  all: unset;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--ds-border-radius-pill);
+  flex-shrink: 0;
+  transition: opacity 100ms ease;
+}
+
+.indicatorBtn:hover {
+  opacity: 0.7;
+}
+
+.indicatorBtn[aria-current='true'] {
+  cursor: default;
+}
+
+.indicatorBtn[aria-current='true']:hover {
+  opacity: 1;
+}
+
+.indicatorBtn:focus-visible {
+  outline: 2px solid var(--ds-color-border-brand);
+  outline-offset: 3px;
+}
+
+/* ─── Compact — unselected dot ─── */
+.dot {
+  border-radius: var(--ds-border-radius-pill);
+  background: var(--ds-color-overlay-inverse20);
+  flex-shrink: 0;
+}
+
+.dotDefault {
+  width: 8px;
+  height: 8px;
+}
+
+.dotLarge {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─── Compact — current indicator (pill track) ─── */
+.currentTrack {
+  border-radius: var(--ds-border-radius-pill);
+  background: var(--ds-color-overlay-inverse20);
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.currentTrackDefault {
+  width: 24px;
+  height: 8px;
+}
+
+.currentTrackLarge {
+  width: 48px;
+  height: 16px;
+}
+
+/* Static fully-filled variant (autoPlay=false) */
+.currentFilled {
+  position: absolute;
+  inset: 0;
+  background: var(--ds-color-overlay-inverse70);
+}
+
+/* ─── Compact — animated progress fill ─── */
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--ds-color-overlay-inverse70);
+  animation: paginationFill linear forwards;
+}
+
+.progressFillPaused {
+  animation-play-state: paused;
+}
+
+@keyframes paginationFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+/* ─── Full — outer layout ─── */
+.full {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ─── Full — "Displaying N of N" ─── */
+.rangeText {
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-placeholder);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.rangeTextStrong {
+  color: var(--ds-color-text-primary);
+}
+
+/* ─── Full — right controls group ─── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-l);
+  flex-shrink: 0;
+}
+
+/* ─── Full — "Items per page" section ─── */
+.perPage {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+}
+
+.perPageLabel {
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-placeholder);
+  white-space: nowrap;
+}
+
+/* Shrink the Dropdown to fit "10 ▾" without extra width */
+.perPageDropdown {
+  width: fit-content !important;
+  min-width: 0 !important;
+}
+
+/* ─── Full — page selection section ─── */
+.pageSelection {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-s);
+}
+
+.ofLabel {
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-placeholder);
+  white-space: nowrap;
+}
+
+/* ─── Full — page number input ─── */
+.pageInput {
+  background-color: var(--ds-color-fill-primary);
+  border: var(--ds-border-width-xs) solid var(--ds-color-border-more-subtle);
+  border-radius: var(--ds-border-radius-s);
+  font-family: var(--ds-body-l-regular-font-family);
+  font-size: var(--ds-body-l-regular-font-size);
+  font-weight: var(--ds-body-l-regular-font-weight);
+  line-height: var(--ds-body-l-regular-line-height);
+  letter-spacing: var(--ds-body-l-regular-letter-spacing);
+  color: var(--ds-color-text-primary);
+  text-align: center;
+  outline: none;
+  box-shadow: 0 0 0 3px transparent;
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+  /* Hide native number spinners */
+  -moz-appearance: textfield;
+}
+
+.pageInput::-webkit-inner-spin-button,
+.pageInput::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pageInput:focus {
+  border-color: var(--ds-color-border-selected);
+  box-shadow: 0 0 0 3px var(--ds-color-fill-brand-subtle);
+}
+
+.pageInputDefault {
+  width: 40px;
+  padding: var(--ds-spacing-s) var(--ds-spacing-m);
+}
+
+.pageInputLarge {
+  width: 48px;
+  padding: var(--ds-spacing-m) 14px;
+}

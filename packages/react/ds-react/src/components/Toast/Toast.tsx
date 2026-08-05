@@ -23,7 +23,7 @@ export interface ToastProps {
   /**
    * When true the close button is shown and the toast persists until the user
    * closes it. When false the toast auto-dismisses after `duration` ms.
-   * @default true
+   * @default false
    */
   dismissible?: boolean;
   /**
@@ -72,7 +72,7 @@ export function Toast({
   title,
   description,
   type = 'default',
-  dismissible = true,
+  dismissible = false,
   onDismiss,
 }: ToastBubbleProps) {
   const iconName = TYPE_ICON[type];
@@ -140,7 +140,7 @@ export function ToastProvider({ children, portalTheme }: { children: ReactNode; 
 
   const addToast = useCallback((props: ToastProps) => {
     const id = crypto.randomUUID();
-    const dismissible = props.dismissible ?? true;
+    const dismissible = props.dismissible ?? false;
     const duration = Math.max(props.duration ?? MIN_DURATION, MIN_DURATION);
 
     setToasts(prev => [
@@ -200,4 +200,9 @@ export function useToast(): ToastContextValue {
   const ctx = useContext(ToastContext);
   if (!ctx) throw new Error('useToast must be used within a <ToastProvider>');
   return ctx;
+}
+
+/** Returns the toast context if a ToastProvider ancestor exists, otherwise null. */
+export function useOptionalToast(): ToastContextValue | null {
+  return useContext(ToastContext);
 }

@@ -4,3 +4,12 @@
   href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
   rel="stylesheet"
 />
+<style>
+  /* The Canvas block (docs primary example) renders stories in a PreviewSizer element
+     with the static class 'docs-story'. That element defaults to auto/content width
+     inside the flex docs column, causing width:100% components to shrink to content.
+     Force it to fill the available column width. */
+  .docs-story {
+    width: 100% !important;
+  }
+</style>

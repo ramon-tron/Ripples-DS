@@ -1,0 +1,117 @@
+/*
+ * Re-assert light-mode DS tokens so a [data-theme="light"] container inside
+ * a dark page works correctly.
+ */
+:global([data-theme="light"]) {
+  --ds-color-fill-primary:         #ffffff;
+  --ds-color-fill-subtle:          #fafafa;
+  --ds-color-text-secondary:       #767676;
+  --ds-color-border-more-subtle:   #e6e6e6;
+  /* Avatar tokens for TranscriptBlock + TranscriptAvatar */
+  --ds-color-fill-avatar1-subtle:  #c8c7ff;
+  --ds-color-fill-avatar2-subtle:  #b0d6ff;
+  --ds-color-fill-avatar3-subtle:  #b1ebd2;
+  --ds-color-fill-avatar4-subtle:  #ffcab0;
+  --ds-color-fill-avatar5-subtle:  #ffefb0;
+  --ds-color-fill-avatar5:         #ffcc00;
+  --ds-color-text-avatar1-subtle:  #2a298c;
+  --ds-color-text-avatar2-subtle:  #0058b5;
+  --ds-color-text-avatar3-subtle:  #02693d;
+  --ds-color-text-avatar4-subtle:  #8c2e00;
+  --ds-color-text-avatar5-subtle:  #6b5600;
+  --ds-color-border-alert:         #e8ba00;
+  --ds-color-text-primary:         #242424;
+  --ds-color-icon-subtle:          #7f7f7f;
+  --ds-color-text-placeholder:     #a1a1a1;
+}
+
+/* ─── Root ─── */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-s);
+  border-radius: var(--ds-border-radius-l);
+  width: 100%;
+  height: 100%;
+}
+
+/* ─── Scroll region ─── */
+.scrollWrapper {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  min-height: 0;
+  /* Clip scroll content to the outer container's rounded top corners */
+  border-radius: var(--ds-border-radius-l) var(--ds-border-radius-l) 0 0;
+}
+
+.scrollArea {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    black                    0%,
+    black                    calc(100% - 80px),
+    rgba(0, 0, 0, 0.85)     calc(100% - 60px),
+    rgba(0, 0, 0, 0.55)     calc(100% - 35px),
+    rgba(0, 0, 0, 0.20)     calc(100% - 15px),
+    transparent              100%
+  );
+}
+
+.blocks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-spacing-m);
+  padding-bottom: 96px; /* keeps last entry above the 80px mask fade zone */
+}
+
+/* ─── "End of Transcript" label ─── */
+.endLabel {
+  margin: 0;
+  text-align: center;
+  font-family: var(--ds-body-s-medium-font-family);
+  font-size: var(--ds-body-s-medium-font-size);
+  font-weight: var(--ds-body-s-medium-font-weight);
+  line-height: var(--ds-body-s-medium-line-height);
+  letter-spacing: var(--ds-body-s-medium-letter-spacing);
+  color: var(--ds-color-text-secondary);
+}
+
+
+/* ─── Search bar ─── */
+.searchBar {
+  flex-shrink: 0;
+}
+
+/* ─── Text selection mode (add-highlight variant) ─── */
+.blocksSelectable {
+  cursor: text;
+  user-select: text;
+}
+
+/* ─── Add Highlight button — position driven by JS via inline style ─── */
+.addHighlightBtn {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-xs);
+  background-color: var(--ds-color-fill-brand);
+  border: none;
+  border-radius: var(--ds-border-radius-s);
+  cursor: pointer;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.08), 0px 8px 4px rgba(0, 0, 0, 0.10);
+  z-index: 1;
+}
+
+.addHighlightBtn:hover {
+  opacity: 0.9;
+}
+
+.addHighlightIcon {
+  display: flex;
+  align-items: center;
+  color: var(--ds-color-text-primary-inverse);
+}

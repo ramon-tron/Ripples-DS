@@ -1,7 +1,7 @@
 import type { ButtonHTMLAttributes } from 'react';
 import styles from './IconButton.module.css';
 import { Icon } from '../Icon/Icon';
-import type { IconSize } from '../Icon/Icon';
+import type { IconSize, IconFill } from '../Icon/Icon';
 
 export type IconButtonVariant =
   | 'primary'
@@ -15,7 +15,7 @@ export type IconButtonVariant =
   | 'destructive-tertiary'
   | 'inverse';
 
-export type IconButtonSize = 'xs' | 's' | 'm' | 'l' | 'xl';
+export type IconButtonSize = '2xs' | 'xs' | 's' | 'm' | 'l' | 'xl';
 export type IconButtonShape = 'circular' | 'square';
 
 export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
@@ -25,16 +25,19 @@ export interface IconButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
   size?: IconButtonSize;
   shape?: IconButtonShape;
   loading?: boolean;
+  /** 0 = outlined, 1 = filled (default). Passed to the Icon's FILL axis. */
+  iconFill?: IconFill;
   /** Required for accessibility — describes the button action */
   'aria-label': string;
 }
 
 const ICON_SIZE: Record<IconButtonSize, IconSize> = {
-  xs: 'xs',
-  s:  'xs',
-  m:  's',
-  l:  'm',
-  xl: 'l',
+  '2xs': 'xxs',
+  xs:    'xxs',
+  s:     'xs',
+  m:     's',
+  l:     'm',
+  xl:    'l',
 };
 
 export function IconButton({
@@ -43,6 +46,7 @@ export function IconButton({
   size = 'l',
   shape = 'circular',
   loading = false,
+  iconFill,
   disabled,
   'aria-label': ariaLabel,
   className = '',
@@ -62,7 +66,7 @@ export function IconButton({
       {loading ? (
         <span className={styles.spinner} aria-hidden="true" />
       ) : (
-        <Icon name={icon} size={ICON_SIZE[size]} />
+        <Icon name={icon} size={ICON_SIZE[size]} fill={iconFill} />
       )}
     </button>
   );

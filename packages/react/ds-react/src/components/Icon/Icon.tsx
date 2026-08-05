@@ -4,6 +4,7 @@ import React from 'react';
 // Material Symbols' `font-size` drives the rendered size;
 // `font-variation-settings: 'opsz'` keeps stroke weight proportional.
 const SIZE_MAP = {
+  xxs: { fontSize: 12, opsz: 12 },
   xs: { fontSize: 16, opsz: 16 },
   s:  { fontSize: 20, opsz: 20 },
   m:  { fontSize: 24, opsz: 24 },

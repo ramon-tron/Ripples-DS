@@ -75,7 +75,7 @@ A composable dropdown (combobox) supporting four interaction modes.
     size:            { control: 'select', options: ['default', 'sm'] },
     label:           { control: 'text' },
     placeholder:     { control: 'text' },
-    helperText:      { control: 'text' },
+    helperText:      { control: 'text', description: 'Optional helper text below the field.', table: { defaultValue: { summary: 'undefined' } } },
     leadingIcon:     { control: 'text' },
     actionIcon:      { control: 'text' },
     actionAriaLabel: { control: 'text' },
@@ -86,7 +86,7 @@ A composable dropdown (combobox) supporting four interaction modes.
   args: {
     label: 'Assign to',
     placeholder: 'Select a person',
-    helperText: 'This field is required.',
+    helperText: 'This text gives further instructions.',
     size: 'default',
     type: 'default',
     items: PEOPLE,

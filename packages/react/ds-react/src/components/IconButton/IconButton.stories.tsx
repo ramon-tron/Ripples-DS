@@ -13,7 +13,7 @@ const meta = {
     docs: {
       description: {
         component: `
-A compact button that contains only a Material Symbols icon. Available in **circular** and **square** shapes across five sizes (\`xs\` → \`xl\`).
+A compact button that contains only a Material Symbols icon. Available in **circular** and **square** shapes across six sizes (\`2xs\` → \`xl\`).
 
 Because there is no visible label, **always supply an \`aria-label\`** that describes the action — e.g. \`"Delete comment"\` rather than just \`"Delete"\`.
 
@@ -39,7 +39,7 @@ Because there is no visible label, **always supply an \`aria-label\`** that desc
     },
     size: {
       control: 'select',
-      options: ['xs', 's', 'm', 'l', 'xl'] satisfies IconButtonSize[],
+      options: ['2xs', 'xs', 's', 'm', 'l', 'xl'] satisfies IconButtonSize[],
     },
     shape: {
       control: 'radio',
@@ -87,7 +87,7 @@ const VARIANT_GROUPS: { label: string; variants: IconButtonVariant[] }[] = [
   { label: 'Inverse',     variants: ['inverse'] },
 ];
 
-const SIZES: IconButtonSize[] = ['xs', 's', 'm', 'l', 'xl'];
+const SIZES: IconButtonSize[] = ['2xs', 'xs', 's', 'm', 'l', 'xl'];
 
 function variantLabel(v: IconButtonVariant) {
   return v.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
@@ -95,7 +95,7 @@ function variantLabel(v: IconButtonVariant) {
 
 const gridStyle: React.CSSProperties = {
   display: 'grid',
-  gridTemplateColumns: '180px repeat(7, 1fr)',
+  gridTemplateColumns: '180px repeat(8, 1fr)',
   gap: '8px',
   alignItems: 'center',
   fontFamily: 'var(--ds-font-family-body)',
