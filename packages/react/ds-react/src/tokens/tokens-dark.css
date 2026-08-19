@@ -303,11 +303,11 @@
   --ds-color-border-subtle: #2e2e2e;
   --ds-color-border-more-subtle: #323232;
   --ds-color-border-inverse: #323232;
-  --ds-color-border-selected: #716fff;
+  --ds-color-border-selected: #8886ff;
   --ds-color-border-disabled: #323232;
   --ds-color-border-brand: #8886ff;
-  --ds-color-border-brand-subtle: #20206b;
-  --ds-color-border-info: #3396ff;
+  --ds-color-border-brand-subtle: #2a298c;
+  --ds-color-border-info: #007cff;
   --ds-color-border-alert: #ffd633;
   --ds-color-border-error: #ff3375;
   --ds-color-border-success: #35cc8c;

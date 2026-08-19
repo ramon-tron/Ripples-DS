@@ -299,9 +299,9 @@
   --ds-color-icon-mono: #242424;
   --ds-color-icon-mono-hover: #323232;
   --ds-color-icon-mono-pressed: #616161;
-  --ds-color-border-primary: #bfbfbf;
-  --ds-color-border-subtle: #d1d1d1;
-  --ds-color-border-more-subtle: #e6e6e6;
+  --ds-color-border-primary: #a3a3a3;
+  --ds-color-border-subtle: #bfbfbf;
+  --ds-color-border-more-subtle: #d1d1d1;
   --ds-color-border-inverse: #fcfcfc;
   --ds-color-border-selected: #4d4bff;
   --ds-color-border-disabled: #d1d1d1;

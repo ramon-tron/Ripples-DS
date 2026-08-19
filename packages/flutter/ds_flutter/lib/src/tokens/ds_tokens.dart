@@ -304,13 +304,14 @@ class DSTokens {
   static const Color colorIconMono = const Color(0xFF242424);
   static const Color colorIconMonoHover = const Color(0xFF323232);
   static const Color colorIconMonoPressed = const Color(0xFF616161);
-  static const Color colorBorderPrimary = const Color(0xFFBFBFBF);
-  static const Color colorBorderSubtle = const Color(0xFFD1D1D1);
-  static const Color colorBorderMoreSubtle = const Color(0xFFE6E6E6);
+  static const Color colorBorderPrimary = const Color(0xFFA3A3A3);
+  static const Color colorBorderSubtle = const Color(0xFFBFBFBF);
+  static const Color colorBorderMoreSubtle = const Color(0xFFD1D1D1);
   static const Color colorBorderInverse = const Color(0xFFFCFCFC);
   static const Color colorBorderSelected = const Color(0xFF4D4BFF);
   static const Color colorBorderDisabled = const Color(0xFFD1D1D1);
   static const Color colorBorderBrand = const Color(0xFF4D4BFF);
+  static const Color colorBorderBrandSubtle = const Color(0xFFC8C7FF);
   static const Color colorBorderInfo = const Color(0xFF007CFF);
   static const Color colorBorderAlert = const Color(0xFFE8BA00);
   static const Color colorBorderError = const Color(0xFFFF0052);

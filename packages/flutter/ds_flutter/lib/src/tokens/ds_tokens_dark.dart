@@ -157,10 +157,11 @@ class DSTokensDark {
   static const Color colorBorderSubtle = const Color(0xFF2E2E2E);
   static const Color colorBorderMoreSubtle = const Color(0xFF323232);
   static const Color colorBorderInverse = const Color(0xFF323232);
-  static const Color colorBorderSelected = const Color(0xFF716FFF);
+  static const Color colorBorderSelected = const Color(0xFF8886FF);
   static const Color colorBorderDisabled = const Color(0xFF323232);
   static const Color colorBorderBrand = const Color(0xFF8886FF);
-  static const Color colorBorderInfo = const Color(0xFF3396FF);
+  static const Color colorBorderBrandSubtle = const Color(0xFF2A298C);
+  static const Color colorBorderInfo = const Color(0xFF007CFF);
   static const Color colorBorderAlert = const Color(0xFFFFD633);
   static const Color colorBorderError = const Color(0xFFFF3375);
   static const Color colorBorderSuccess = const Color(0xFF35CC8C);
